@@ -24,13 +24,13 @@ export class Alojamientoservice {
         )
     }
 
-    getAlojamientosByContains(s:string) {
+    getAlojamientosByContains(s:string) :Observable<Alojamiento[]> {
         return this.getAlojamientos().pipe(
             map((alojamientos: Alojamiento[]) => alojamientos.filter((a: Alojamiento) => a.nombre.toLowerCase().includes(s.toLowerCase())))
         )
     }
 
-    getAlojamientosByFilter(filtro:FiltroAlojamiento) {
+    getAlojamientosByFilter(filtro:FiltroAlojamiento) :Observable<Alojamiento[]> {
         return this.getAlojamientos().pipe(
             map((alojamientos: Alojamiento[]) =>
                 alojamientos.filter((a: Alojamiento) => filtro.ciudad === undefined || a.ciudad === filtro.ciudad)
