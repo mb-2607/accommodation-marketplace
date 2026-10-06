@@ -1,0 +1,27 @@
+<div class="row align-items-center g-4">
+
+  <div class="col-12 col-lg-5">
+    <div class="texto-destinos">
+      <span class="etiqueta-destinos">EXPLORA COLOMBIA</span>
+
+      <h2>Tu próximo destino está aquí</h2>
+
+      <p>
+        Descubre nuestros alojamientos en Colombia.
+        Pasa el cursor sobre un departamento para conocer
+        su nombre y haz clic para explorar sus alojamientos.
+      </p>
+
+      <div class="destino-indicado">
+        <span>Departamento</span>
+        <strong>{{ departamentoActivo || 'Explora el mapa' }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-7">
+    <div #mapa class="mapa-colombia"></div>
+    <p role="alert">{{ error }}</p>
+  </div>
+
+</div>

@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.texto-destinos {
+  max-width: 460px;
+}
+
+.etiqueta-destinos {
+  color: #a88a36;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.texto-destinos h2 {
+  margin: 16px 0;
+  color: #171717;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 700;
+}
+
+.texto-destinos p {
+  color: #666;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.destino-indicado {
+  margin-top: 24px;
+  padding-left: 16px;
+  border-left: 3px solid #c8a951;
+}
+
+.destino-indicado span {
+  display: block;
+  color: #777;
+  font-size: 14px;
+}
+
+.destino-indicado strong {
+  display: block;
+  margin-top: 6px;
+  color: #a88a36;
+  font-size: 24px;
+}
+
+.mapa-colombia {
+  display: block;
+  width: 100%;
+  height: 520px;
+  background: transparent;
+  border: none;
+}
+
+@media (max-width: 991px) {
+  .mapa-colombia {
+    height: 420px;
+  }
+}
