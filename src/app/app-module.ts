@@ -9,6 +9,8 @@ import { Mapacomponent } from "./components/mapacomponent/mapacomponent";
 import { Footercomponent } from "./components/footercomponent/footercomponent";
 import { FormsModule } from "@angular/forms";
 import { Cotizacioncomponent } from "./components/cotizacioncomponent/cotizacioncomponent";
+import {Logincomponent} from "./components/loggincomponent/loggincomponent";
+import {provideHttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import { Cotizacioncomponent } from "./components/cotizacioncomponent/cotizacion
     Mapacomponent,
     Footercomponent,
     Cotizacioncomponent,
+    Logincomponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [provideBrowserGlobalErrorListeners()],
+  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
   bootstrap: [App],
 })
-export class AppModule {}
+export class AppModule {
+}
