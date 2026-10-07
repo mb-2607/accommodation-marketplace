@@ -5,10 +5,8 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import {
-  Alojamiento,
-  AlojamientosService
-} from '../../services/alojamientos';
+import { Alojamiento} from "../../model/alojamientomodel";
+import { Alojamientoservice} from "../../services/alojamientoservice";
 
 @Component({
   selector: 'app-iniciocomponent',
@@ -67,20 +65,18 @@ export class Iniciocomponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private alojamientosService: AlojamientosService,
+    private alojamientosService: Alojamientoservice,
     private cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
     // Consultar los alojamientos mediante el servicio.
-    this.alojamientosService.obtenerDatos().subscribe({
+    this.alojamientosService.getAlojamientos().subscribe({
       next: (datos) => {
         if (this.destruido) return;
 
-        this.alojamientosCarrusel = datos.alojamientos.filter(
-          alojamiento => alojamiento.activo
-        );
+        this.alojamientosCarrusel = datos;
 
         this.indiceCarrusel = 0;
         this.cargandoCarrusel = false;
