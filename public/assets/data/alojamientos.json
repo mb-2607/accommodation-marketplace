@@ -3,6 +3,7 @@
     "id": 1,
     "nombre": "Loft moderno en Chapinero",
     "descripcion": "Loft moderno ubicado cerca de restaurantes, cafés y zonas comerciales de Bogotá.",
+    "departamento": "Bogotá, D.C.",
     "ciudad": "Bogotá",
     "ubicacion": "Chapinero, Bogotá",
     "coords": {
@@ -38,6 +39,7 @@
     "id": 2,
     "nombre": "Apartamento frente al mar",
     "descripcion": "Apartamento con vista al mar ubicado en una zona turística de Cartagena.",
+    "departamento": "Bolívar",
     "ciudad": "Cartagena",
     "ubicacion": "Bocagrande, Cartagena",
     "coords": {
@@ -74,6 +76,7 @@
     "id": 3,
     "nombre": "Cabaña en Guatapé",
     "descripcion": "Cabaña rodeada de naturaleza con vista al embalse de Guatapé.",
+    "departamento": "Antioquia",
     "ciudad": "Guatapé",
     "ubicacion": "Guatapé, Antioquia",
     "coords": {
@@ -109,6 +112,7 @@
     "id": 4,
     "nombre": "Casa colonial en Villa de Leyva",
     "descripcion": "Casa de estilo colonial localizada cerca de la plaza principal.",
+    "departamento": "Boyacá",
     "ciudad": "Villa de Leyva",
     "ubicacion": "Centro histórico",
     "coords": {
@@ -144,6 +148,7 @@
     "id": 5,
     "nombre": "Apartamento ejecutivo Medellín",
     "descripcion": "Apartamento moderno cercano a zonas comerciales y empresariales.",
+    "departamento": "Antioquia",
     "ciudad": "Medellín",
     "ubicacion": "El Poblado, Medellín",
     "coords": {
@@ -177,6 +182,7 @@
     "id": 6,
     "nombre": "Casa campestre",
     "descripcion": "Casa campestre actualmente fuera de servicio.",
+    "departamento": "Risaralda",
     "ciudad": "Armenia",
     "ubicacion": "Zona rural",
     "coords": {

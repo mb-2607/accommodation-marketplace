@@ -1,0 +1,58 @@
+<div class="section mx-5">
+    @if(isFechaInvalida){
+        <div class="row">
+            <div class="col-12">
+                <p>Fecha invalida</p>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <label for="fechaInicio" class="form-label">Selecciona una fecha inicial</label>
+            <input type="date" id="fechaInicio" class="form-control" [(ngModel)]="fechaInicio">
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="fechaFin" class="form-label">Selecciona una fecha final</label>
+            <input type="date" id="fechaFin" class="form-control" [(ngModel)]="fechaFin">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if(isHuespedesMenorACero){
+                <p>El numero de huespedes debe ser mayor a 0</p>
+            } @else if (isHuespedesMayorACapacidad){
+                <p>El número de huespedes debe ser menor a la capacidad</p>
+            }
+            <p>Selecciona un número de huéspedes</p>
+        </div>
+    </div>
+    <div class="row align-items-center text-center">
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" (click)="restCantidadHuespedes()">-</button>
+        </div>
+        <div class="col-4">
+            <p>{{cantidadHuespedes}}</p>
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" (click)="addCantidadHuespedes()">+</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" (click)="realizarCotizacion()">Cotizar</button>
+        </div>
+    </div>
+    @if(cotizacionValida && cotizacion){
+        <div class="row">
+            <p>id: {{cotizacion.alojamientoId}}</p>
+            <p>llegada: {{cotizacion.fechaLlegada}}</p>
+            <p>salida: {{cotizacion.fechaSalida}}</p>
+            <p>Huéspedes: {{cotizacion.numeroHuespedes}}</p>
+            <p>Noches: {{cotizacion.numeroNoches}}</p>
+            <p>Subtotal: {{cotizacion.subtotal}}</p>
+            <p>Limpieza: {{cotizacion.tarifaLimpieza}}</p>
+            <p>Servicio: {{cotizacion.tarifaServicio}}</p>
+            <p>Total: {{cotizacion.total}}</p>
+        </div>
+    }
+</div>

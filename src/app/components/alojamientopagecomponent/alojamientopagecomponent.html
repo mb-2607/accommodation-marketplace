@@ -1,2 +1,17 @@
-<p>alojamientopagecomponent works!</p>
-<p>{{alojamientoId}}</p>
+@if(alojamientoExiste) {
+    @if(alojamiento) {
+        <div class="section">
+            <h1>{{alojamiento.nombre}}</h1>
+            <p>{{alojamiento.precioNoche}}</p>
+            <h2>{{alojamiento.ciudad}}</h2>
+            <h2>{{alojamiento.departamento}}</h2>
+
+            <app-cotizacioncomponent [alojamiento]="alojamiento"></app-cotizacioncomponent>
+        </div>
+    } @else {
+        <p>cargando...</p>
+    }
+}
+@else {
+    <p>No existe =(</p>
+}

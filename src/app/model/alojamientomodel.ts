@@ -6,6 +6,7 @@ export interface Alojamiento {
     id: number;
     nombre: string;
     descripcion: string;
+    departamento: string;
     ciudad: string;
     ubicacion: string;
     coords?: Coordenadas;
