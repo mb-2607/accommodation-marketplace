@@ -1,0 +1,301 @@
+<header class="login-cabecera">
+    <h1 class="login-titulo">
+        Regístrate y encuentra tu lugar ideal
+    </h1>
+
+    <p class="login-descripcion">
+        Vive momentos increíbles, desconéctate de la rutina
+        y disfruta un viaje para recordar.
+    </p>
+</header>
+
+<section class="login-pagina">
+    <div class="login-distribucion">
+
+        <aside class="login-publicidad">
+            <img
+                    src="assets/images/publicidad-login.jpg"
+                    alt="Descubre alojamientos para tu próxima escapada en Colombia">
+        </aside>
+
+        <div class="login-contenedor">
+
+            <aside class="login-lateral">
+                <a routerLink="/inicio" class="login-marca">
+          <span class="login-logo-fondo">
+            <img
+                    src="assets/logoEmpresa.png"
+                    alt="Reservas LR"
+                    class="login-logo">
+          </span>
+
+                    <span>Reservas <strong>LR</strong></span>
+                </a>
+
+                <div class="login-presentacion">
+          <span class="login-etiqueta">
+            TU PRÓXIMA EXPERIENCIA COMIENZA AQUÍ
+          </span>
+
+                    <h1>
+                        Un lugar para descansar.
+                        <span>Mil razones para viajar.</span>
+                    </h1>
+
+                    <p>
+                        Encuentra alojamientos para tus vacaciones,
+                        viajes de trabajo y momentos especiales
+                        en Colombia.
+                    </p>
+                </div>
+
+                <div class="login-beneficios">
+                    <span>Destinos en Colombia</span>
+                    <span>Estancias para cada ocasión</span>
+                </div>
+            </aside>
+
+            <div class="login-formulario">
+        <span class="login-etiqueta formulario-etiqueta">
+          BIENVENIDO A RESERVAS LR
+        </span>
+
+                <h2>
+                    {{ modoRegistro ? 'Crea tu cuenta' : 'Iniciar sesión' }}
+                </h2>
+
+                <p class="login-subtitulo">
+                    {{
+                        modoRegistro
+                            ? 'Regístrate y comienza a planear tu próxima estancia.'
+                            : 'Ingresa a tu cuenta y continúa planeando tu viaje.'
+                    }}
+                </p>
+
+                <div
+                        *ngIf="mensaje"
+                        class="login-alerta"
+                        role="alert">
+                    {{ mensaje }}
+                </div>
+
+                <form
+                    #formulario="ngForm"
+                    (ngSubmit)="iniciarSesion()">
+
+                    <ng-container *ngIf="modoRegistro">
+                        <label for="nombreCompleto">Nombre completo</label>
+
+                        <input
+                                id="nombreCompleto"
+                                name="nombreCompleto"
+                                type="text"
+                                [(ngModel)]="nombreCompleto"
+                                #nombreCampo="ngModel"
+                                placeholder="Escribe tu nombre completo"
+                                autocomplete="name"
+                                required
+                                minlength="6"
+                                maxlength="100"
+                                [pattern]="patronNombre"
+                                [disabled]="cargando">
+
+                        <p
+                                *ngIf="nombreCampo.touched && nombreCampo.invalid"
+                                class="login-error">
+                            Ingresa mínimo 6 carácteres. Usa únicamente letras y espacios.
+                        </p>
+
+                        <label for="documento">Número de documento</label>
+
+                        <input
+                                id="documento"
+                                name="documento"
+                                type="text"
+                                inputmode="numeric"
+                                [(ngModel)]="documento"
+                                #documentoCampo="ngModel"
+                                placeholder="Escribe tu número de documento"
+                                required
+                                pattern="[0-9]+"
+                                maxlength="20"
+                                [disabled]="cargando">
+
+                        <p
+                                *ngIf="documentoCampo.touched && documentoCampo.invalid"
+                                class="login-error">
+                            El documento debe contener únicamente números.
+                        </p>
+
+                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+
+                        <input
+                                id="fechaNacimiento"
+                                name="fechaNacimiento"
+                                type="date"
+                                [(ngModel)]="fechaNacimiento"
+                                #fechaCampo="ngModel"
+                                autocomplete="bday"
+                                required
+                                [max]="fechaMaximaNacimiento"
+                                [disabled]="cargando">
+
+                        <p
+                                *ngIf="fechaCampo.touched && (fechaCampo.invalid || edad === null)"
+                                class="login-error">
+                            Selecciona una fecha válida que no sea futura.
+                        </p>
+
+                        <p
+                                *ngIf="edad !== null"
+                                class="login-ayuda">
+                            Edad: {{ edad }} años.
+                        </p>
+                    </ng-container>
+
+                    <label for="correo">Correo electrónico</label>
+
+                    <input
+                            id="correo"
+                            name="correo"
+                            type="email"
+                            [(ngModel)]="correo"
+                            #correoCampo="ngModel"
+                            placeholder="tucorreo@ejemplo.com"
+                            autocomplete="email"
+                            required
+                            email
+                            [disabled]="cargando">
+
+                    <p
+                            *ngIf="correoCampo.touched && correoCampo.invalid"
+                            class="login-error">
+                        Ingresa un correo electrónico válido.
+                    </p>
+
+                    <label for="contrasena">Contraseña</label>
+
+                    <div class="login-campo-contrasena">
+                        <input
+                                id="contrasena"
+                                name="contrasena"
+                                [type]="mostrarContrasena ? 'text' : 'password'"
+                                [(ngModel)]="contrasena"
+                                #contrasenaCampo="ngModel"
+                                [attr.autocomplete]="modoRegistro ? 'new-password' : 'current-password'"
+                                placeholder="Escribe tu contraseña"
+                                required
+                                [minlength]="modoRegistro ? 6 : 1"
+                                [disabled]="cargando">
+
+                        <button
+                                type="button"
+                                class="login-ver"
+                                [attr.aria-label]="mostrarContrasena ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                                [attr.aria-pressed]="mostrarContrasena"
+                                (click)="mostrarContrasena = !mostrarContrasena"
+                                [disabled]="cargando">
+
+                            <i
+                                    class="fa-solid"
+                                    [class.fa-eye]="!mostrarContrasena"
+                                    [class.fa-eye-slash]="mostrarContrasena"
+                                    aria-hidden="true">
+                            </i>
+                        </button>
+                    </div>
+
+                    <p
+                            *ngIf="contrasenaCampo.touched && contrasenaCampo.invalid"
+                            class="login-error">
+                        {{
+                            modoRegistro
+                                ? 'La contraseña debe tener al menos 6 caracteres.'
+                                : 'Ingresa tu contraseña.'
+                        }}
+                    </p>
+
+                    <ng-container *ngIf="modoRegistro">
+                        <label for="confirmacion">Confirmar contraseña</label>
+
+                        <input
+                                id="confirmacion"
+                                name="confirmacion"
+                                [type]="mostrarContrasena ? 'text' : 'password'"
+                                [(ngModel)]="confirmacion"
+                                #confirmacionCampo="ngModel"
+                                autocomplete="new-password"
+                                placeholder="Repite tu contraseña"
+                                required
+                                minlength="6"
+                                [disabled]="cargando">
+
+                        <p
+                                *ngIf="confirmacionCampo.touched && confirmacionCampo.invalid"
+                                class="login-error">
+                            Confirma tu contraseña con al menos 6 caracteres.
+                        </p>
+
+                        <p
+                                *ngIf="confirmacionCampo.touched && confirmacionCampo.valid && confirmacion !== contrasena"
+                                class="login-error">
+                            Las contraseñas no coinciden.
+                        </p>
+
+                        <p class="login-ayuda">
+                            Utiliza al menos 6 caracteres.
+                        </p>
+                    </ng-container>
+
+                    <button
+                            type="submit"
+                            class="login-boton"
+                            [disabled]="
+            cargando ||
+            formulario.invalid ||
+            (modoRegistro && (confirmacion !== contrasena || edad === null))
+        ">
+                        {{
+                            cargando
+                                ? 'Procesando…'
+                                : modoRegistro
+                                    ? 'Crear mi cuenta'
+                                    : 'Ingresar'
+                        }}
+
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p
+                            *ngIf="cargando"
+                            class="login-ayuda"
+                            role="status">
+                        Estamos verificando tus datos.
+                    </p>
+                </form>
+
+                <p class="login-registro">
+                    {{
+                        modoRegistro
+                            ? '¿Ya tienes cuenta?'
+                            : '¿Aún no tienes cuenta?'
+                    }}
+
+                    <button
+                            type="button"
+                            class="login-enlace"
+                            (click)="cambiarModo()"
+                            [disabled]="cargando">
+                        {{ modoRegistro ? 'Inicia sesión' : 'Regístrate' }}
+                    </button>
+                </p>
+
+                <a routerLink="/inicio" class="login-volver">
+                    <span aria-hidden="true">←</span>
+                    Volver al inicio
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>

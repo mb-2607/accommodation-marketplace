@@ -1,0 +1,254 @@
+:host {
+  display: block;
+}
+
+.navbar {
+  min-height: 76px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.navbar-contenido {
+  gap: 24px;
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.logo-navbar {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.titulo-principal {
+  color: #171717;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.navbar-collapse {
+  align-items: center;
+  gap: 28px;
+}
+
+.buscador-navbar {
+  display: flex;
+  align-items: center;
+  flex: 1 1 350px;
+  max-width: 440px;
+  min-width: 180px;
+  height: 46px;
+  padding: 4px 5px 4px 18px;
+  background: #f2f2f4;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buscador-navbar:focus-within {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+
+.buscador-navbar input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #171717;
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.buscador-navbar input::placeholder {
+  color: #777;
+}
+
+.buscador-navbar button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: #d4af37;
+  color: #171717;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buscador-navbar button:hover {
+  background: #f0cb58;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.55);
+}
+
+.menu-principal {
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.navbar .nav-animado {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 12px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #171717;
+  font-size: 0.86rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease,
+  color 0.2s ease,
+  box-shadow 0.2s ease;
+}
+
+.navbar .nav-animado:hover,
+.navbar .nav-animado:focus-visible {
+  background: #d4af37;
+  color: #111;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.navbar .nav-animado.active:not(.acceso-usuario) {
+  color: #8b6a13;
+  background: rgba(212, 175, 55, 0.13);
+}
+
+.navbar .nav-animado::before {
+  content: "";
+  position: absolute;
+  top: 7%;
+  left: 0;
+  width: 0;
+  height: 86%;
+  opacity: 0;
+  background: #fff8d5;
+  box-shadow: 0 0 50px 30px #fff8d5;
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.navbar .nav-animado:hover::before {
+  animation: brillo-dorado 0.5s linear;
+}
+
+@keyframes brillo-dorado {
+  from {
+    left: 0;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.navbar .acceso-usuario {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  background: #171717;
+  color: #fff;
+}
+
+.navbar .acceso-usuario.active {
+  background: #171717;
+  color: #f1cf66;
+}
+
+.navbar .acceso-usuario:hover,
+.navbar .acceso-usuario:focus-visible {
+  background: #d4af37;
+  color: #111;
+}
+
+.navbar-toggler {
+  border: 1px solid #d4af37;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+@media (max-width: 1199px) {
+  .navbar-collapse {
+    gap: 12px;
+  }
+
+  .navbar-contenido {
+    gap: 14px;
+  }
+
+  .titulo-principal {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .navbar-collapse {
+    padding-top: 18px;
+  }
+
+  .buscador-navbar {
+    max-width: none;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .menu-principal {
+    align-items: stretch;
+    gap: 4px;
+    margin: 0 0 12px;
+  }
+
+  .navbar .nav-animado {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .navbar .acceso-usuario {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar .nav-animado,
+  .buscador-navbar,
+  .buscador-navbar button {
+    transition: none;
+  }
+
+  .navbar .nav-animado:hover::before {
+    animation: none;
+  }
+}

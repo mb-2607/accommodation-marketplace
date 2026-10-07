@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "alojamientoId": 1,
+    "usuario": "Laura Gómez",
+    "calificacion": 5,
+    "comentario": "Excelente ubicación y apartamento muy cómodo."
+  },
+  {
+    "id": 2,
+    "alojamientoId": 1,
+    "usuario": "Carlos Ruiz",
+    "calificacion": 4,
+    "comentario": "Muy buena experiencia."
+  },
+  {
+    "id": 3,
+    "alojamientoId": 2,
+    "usuario": "Andrea López",
+    "calificacion": 5,
+    "comentario": "La vista es excelente y la ubicación muy conveniente."
+  },
+  {
+    "id": 4,
+    "alojamientoId": 3,
+    "usuario": "Miguel Torres",
+    "calificacion": 5,
+    "comentario": "Excelente lugar para descansar."
+  },
+  {
+    "id": 5,
+    "alojamientoId": 4,
+    "usuario": "Natalia Pérez",
+    "calificacion": 4,
+    "comentario": "La casa es amplia y está muy bien ubicada."
+  }
+]

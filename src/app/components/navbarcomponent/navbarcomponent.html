@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid navbar-contenido">
+
+        <a class="navbar-brand" routerLink="/inicio" aria-label="Ir al inicio">
+            <img
+                    src="assets/logoEmpresa.png"
+                    alt="Logo de Inversiones LR"
+                    class="logo-navbar">
+            <span class="titulo-principal">{{ nombretienda }}</span>
+        </a>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar"
+                aria-controls="navbar"
+                aria-expanded="false"
+                aria-label="Abrir menú">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+
+            <form
+                    class="buscador-navbar"
+                    role="search"
+                    (ngSubmit)="buscar()">
+                <input
+                        type="search"
+                        name="terminoBusqueda"
+                        [(ngModel)]="terminoBusqueda"
+                        placeholder="Busca tu próximo alojamiento"
+                        aria-label="Buscar alojamientos">
+
+                <button type="submit" aria-label="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+
+            <ul class="navbar-nav menu-principal">
+                <li class="nav-item">
+                    <a
+                            class="nav-link nav-animado"
+                            routerLink="/inicio"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                        Inicio
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                            class="nav-link nav-animado"
+                            routerLink="/alojamientos"
+                            routerLinkActive="active">
+                        Explorar alojamientos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                            class="nav-link nav-animado"
+                            routerLink="/mis-reservas"
+                            routerLinkActive="active">
+                        Mis reservas
+                    </a>
+                </li>
+            </ul>
+
+            <a
+                    class="nav-link nav-animado acceso-usuario"
+                    routerLink="/loggin"
+                    routerLinkActive="active"
+                    aria-label="Iniciar sesión">
+                <i class="fa-regular fa-user"></i>
+                <span>Mi perfil</span>
+            </a>
+
+        </div>
+    </div>
+</nav>
