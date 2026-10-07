@@ -1,9 +1,13 @@
 <div class="d-flex flex-column min-vh-100">
-    <app-navbarcomponent></app-navbarcomponent>
+    <app-navbarcomponent
+            *ngIf="mostrarContenido">
+    </app-navbarcomponent>
 
     <main class="flex-grow-1">
         <router-outlet></router-outlet>
     </main>
 
-    <app-footercomponent></app-footercomponent>
+    <app-footercomponent
+            *ngIf="mostrarContenido">
+    </app-footercomponent>
 </div>

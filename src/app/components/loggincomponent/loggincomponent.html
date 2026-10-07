@@ -1,0 +1,175 @@
+<section class="login-pagina">
+    <div class="login-contenedor">
+
+        <aside class="login-lateral">
+            <a routerLink="/inicio" class="login-marca">
+        <span class="login-logo-fondo">
+          <img
+                  src="assets/logoEmpresa.png"
+                  alt="Reservas LR"
+                  class="login-logo">
+        </span>
+
+                <span>Reservas <strong>LR</strong></span>
+            </a>
+
+            <div class="login-presentacion">
+        <span class="login-etiqueta">
+          TU PRÓXIMA EXPERIENCIA COMIENZA AQUÍ
+        </span>
+
+                <h1>
+                    Un lugar para descansar.
+                    <span>Mil razones para viajar.</span>
+                </h1>
+
+                <p>
+                    Encuentra alojamientos para tus vacaciones,
+                    viajes de trabajo y momentos especiales
+                    en Colombia.
+                </p>
+            </div>
+
+            <div class="login-beneficios">
+                <span>Destinos en Colombia</span>
+                <span>Estancias para cada ocasión</span>
+            </div>
+        </aside>
+
+        <div class="login-formulario">
+      <span class="login-etiqueta formulario-etiqueta">
+        BIENVENIDO A RESERVAS LR
+      </span>
+
+            <h2>
+                {{ modoRegistro ? 'Crea tu cuenta' : 'Iniciar sesión' }}
+            </h2>
+
+            <p class="login-subtitulo">
+                {{
+                    modoRegistro
+                        ? 'Regístrate y comienza a planear tu próxima estancia.'
+                        : 'Ingresa a tu cuenta y continúa planeando tu viaje.'
+                }}
+            </p>
+
+            <div
+                    *ngIf="mensaje"
+                    class="login-alerta"
+                    role="alert">
+                {{ mensaje }}
+            </div>
+
+            <form
+                #formulario="ngForm"
+                (ngSubmit)="iniciarSesion()">
+
+                <label for="correo">Correo electrónico</label>
+
+                <input
+                        id="correo"
+                        name="correo"
+                        type="email"
+                        [(ngModel)]="correo"
+                        placeholder="tucorreo@ejemplo.com"
+                        autocomplete="email"
+                        required
+                        email
+                        [disabled]="cargando">
+
+                <label for="contrasena">Contraseña</label>
+
+                <div class="login-campo-contrasena">
+                    <input
+                            id="contrasena"
+                            name="contrasena"
+                            [type]="mostrarContrasena ? 'text' : 'password'"
+                            [(ngModel)]="contrasena"
+                            [attr.autocomplete]="
+              modoRegistro ? 'new-password' : 'current-password'
+            "
+                            placeholder="Escribe tu contraseña"
+                            required
+                            [minlength]="modoRegistro ? 6 : 1"
+                            [disabled]="cargando">
+
+                    <button
+                            type="button"
+                            class="login-ver"
+                            [attr.aria-label]="
+              mostrarContrasena
+                ? 'Ocultar contraseña'
+                : 'Mostrar contraseña'
+            "
+                            [attr.aria-pressed]="mostrarContrasena"
+                            (click)="mostrarContrasena = !mostrarContrasena"
+                            [disabled]="cargando">
+                        {{ mostrarContrasena ? 'Ocultar' : 'Ver' }}
+                    </button>
+                </div>
+
+                <ng-container *ngIf="modoRegistro">
+                    <label for="confirmacion">
+                        Confirmar contraseña
+                    </label>
+
+                    <input
+                            id="confirmacion"
+                            name="confirmacion"
+                            [type]="mostrarContrasena ? 'text' : 'password'"
+                            [(ngModel)]="confirmacion"
+                            autocomplete="new-password"
+                            placeholder="Repite tu contraseña"
+                            required
+                            minlength="6"
+                            [disabled]="cargando">
+
+                    <p class="login-ayuda">
+                        Utiliza al menos 6 caracteres.
+                    </p>
+                </ng-container>
+
+                <button
+                        type="submit"
+                        class="login-boton"
+                        [disabled]="cargando || formulario.invalid">
+                    {{
+                        cargando
+                            ? 'Procesando…'
+                            : modoRegistro
+                                ? 'Crear mi cuenta'
+                                : 'Ingresar'
+                    }}
+
+                    <span aria-hidden="true">→</span>
+                </button>
+
+                <p *ngIf="cargando" class="login-ayuda" role="status">
+                    Estamos verificando tus datos.
+                </p>
+            </form>
+
+            <p class="login-registro">
+                {{
+                    modoRegistro
+                        ? '¿Ya tienes cuenta?'
+                        : '¿Aún no tienes cuenta?'
+                }}
+
+                <button
+                        type="button"
+                        class="login-enlace"
+                        (click)="cambiarModo()"
+                        [disabled]="cargando">
+                    {{ modoRegistro ? 'Inicia sesión' : 'Regístrate' }}
+                </button>
+            </p>
+
+            <a routerLink="/inicio" class="login-volver">
+                <span aria-hidden="true">←</span>
+                Volver al inicio
+            </a>
+        </div>
+
+    </div>
+</section>
