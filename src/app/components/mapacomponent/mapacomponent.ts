@@ -47,11 +47,11 @@ export class Mapacomponent implements AfterViewInit, OnDestroy {
         'assets/colombia-departamentos.geojson'
       );
 
-      if (!respuesta.ok) {
-        throw new Error(
-          `Error al cargar el mapa: ${respuesta.status}`
-        );
-      }
+        if (!respuesta.ok) {
+            throw new Error(
+                    `Error al cargar el mapa: ${respuesta.status}`
+            );
+        }
 
       const datos: FeatureCollection = await respuesta.json();
 
