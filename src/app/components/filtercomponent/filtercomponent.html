@@ -1,0 +1,51 @@
+<form [formGroup]="form">
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"
+               id="usarPrecioMin" formControlName="usarPrecioMin">
+        <label class="form-check-label" for="usarPrecioMin">Precio mínimo</label>
+    </div>
+    <input type="range" class="form-range" formControlName="precioMin"
+           min="0" max="4000000" step="50000">
+    <small>{{ form.controls.precioMin.value | currency:'COP':'symbol':'1.0-0' }}</small>
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"
+               id="usarPrecioMax" formControlName="usarPrecioMax">
+        <label class="form-check-label" for="usarPrecioMax">Precio máximo</label>
+    </div>
+    <input type="range" class="form-range" formControlName="precioMax"
+           min="0" max="4000000" step="50000">
+    <small>{{ form.controls.precioMax.value | currency:'COP':'symbol':'1.0-0' }}</small>
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch"
+               id="usarHuespedes" formControlName="usarHuespedes">
+        <label class="form-check-label" for="usarHuespedes">Huéspedes</label>
+    </div>
+    <button type="button" class="btn btn-outline-secondary"
+            [disabled]="!form.controls.usarHuespedes.value"
+            (click)="cambiarHuespedes(-1)">−</button>
+    <span>{{ form.controls.numeroHuespedes.value }}</span>
+    <button type="button" class="btn btn-outline-secondary"
+            [disabled]="!form.controls.usarHuespedes.value"
+            (click)="cambiarHuespedes(1)">+</button>
+
+    <select class="form-select" formControlName="tipo">
+        <option value="">Todos</option>
+        @for (t of tipos; track t) {
+            <option [value]="t">{{ t }}</option>
+        }
+    </select>
+
+    <input type="text" class="form-control" formControlName="ciudad" placeholder="Ciudad">
+    <input type="text" class="form-control" formControlName="departamento" placeholder="Departamento">
+</form>
+
+@if (listaAlojamiento) {
+    @for (a of listaAlojamiento; track a.id) {
+        <div>{{ a.nombre }}</div>
+    } @empty {
+        <p>No hay alojamientos que coincidan con los filtros.</p>
+    }
+}
