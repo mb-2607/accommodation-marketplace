@@ -8,22 +8,88 @@
 }
 
 .login-pagina {
-    min-height: 720px;
-    padding: 72px 24px;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f3f4f6;
+}
+
+.login-cabecera {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 40px 24px 75px;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    background: linear-gradient(
+            to bottom,
+            #000000 0%,
+            #080808 45%,
+            #414142 65%,
+            #a5a6a8 83%,
+            #e4e5e7 94%,
+            #f3f4f6 100%
+    );
+}
+
+.login-titulo {
+    max-width: 1100px;
+    margin: 0 auto;
+    color: #e3ce8a;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 750;
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+.login-cabecera .login-descripcion {
+    max-width: 720px;
+    margin: 16px auto 0;
+    color: #e3ce8a;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+    text-wrap: balance;
+}
+
+.login-distribucion {
+    flex: 1;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 150px 24px 20px;
     display: grid;
-    place-items: center;
-    background: radial-gradient(
-            circle at 15% 20%,
-            rgba(212, 175, 55, 0.12),
-            transparent 38%
-    ),
-    #f7f6f2;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    align-items: center;
+    align-content: start;
+    gap: 48px;
+}
+
+.login-publicidad {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-publicidad img {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    max-height: 620px;
+    object-fit: contain;
 }
 
 .login-contenedor {
-    width: min(100%, 1040px);
+    width: 100%;
+    min-width: 0;
+    margin: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     overflow: hidden;
     border: 1px solid rgba(166, 124, 28, 0.2);
     border-radius: 24px;
@@ -33,11 +99,12 @@
 
 .login-lateral {
     position: relative;
-    padding: 48px;
+    min-width: 0;
+    padding: clamp(24px, 2.5vw, 48px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 64px;
+    gap: 48px;
     color: #fff;
     background: radial-gradient(
             circle at 100% 100%,
@@ -50,8 +117,8 @@
 .login-marca {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
     align-self: flex-start;
+    gap: 14px;
     color: #fff;
     font-size: 1.2rem;
     text-decoration: none;
@@ -62,6 +129,7 @@
 }
 
 .login-logo-fondo {
+    flex-shrink: 0;
     width: 64px;
     height: 64px;
     padding: 10px;
@@ -81,21 +149,24 @@
 .login-etiqueta {
     display: block;
     margin-bottom: 20px;
-    color: #e4c66c;
+    color: #e3ce8a;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     line-height: 1.8;
 }
 
-.login-presentacion h1 {
+.login-presentacion h1,
+.login-presentacion h2 {
     margin: 0 0 24px;
+    color: #fff;
     font-size: clamp(2rem, 3vw, 2.75rem);
     font-weight: 750;
     line-height: 1.2;
 }
 
-.login-presentacion h1 span {
+.login-presentacion h1 span,
+.login-presentacion h2 span {
     display: block;
     margin-top: 12px;
     color: #e4c66c;
@@ -123,7 +194,12 @@
 }
 
 .login-formulario {
-    padding: 54px 48px;
+    min-width: 0;
+    padding: clamp(24px, 2.5vw, 48px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
 }
 
 .formulario-etiqueta {
@@ -156,6 +232,7 @@
 .login-formulario input {
     display: block;
     width: 100%;
+    min-width: 0;
     min-height: 48px;
     padding: 13px 15px;
     border: 1px solid #dedbd2;
@@ -175,7 +252,18 @@
 }
 
 .login-formulario input::placeholder {
-    color: #929292;
+    color: #737373;
+}
+
+.login-formulario input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-formulario input:-webkit-autofill {
+    -webkit-text-fill-color: #171717;
+    -webkit-box-shadow: 0 0 0 1000px #f5f7fa inset;
+    caret-color: #171717;
 }
 
 .login-campo-contrasena {
@@ -240,6 +328,7 @@
     color: #9a3026;
     font-size: 0.88rem;
     line-height: 1.6;
+    overflow-wrap: anywhere;
 }
 
 .login-ayuda {
@@ -265,8 +354,14 @@
     cursor: pointer;
 }
 
-.login-enlace:hover {
+.login-enlace:hover:not(:disabled) {
     text-decoration: underline;
+}
+
+.login-enlace:disabled,
+.login-ver:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .login-volver {
@@ -289,27 +384,49 @@
     outline-offset: 4px;
 }
 
-@media (max-width: 760px) {
-    .login-pagina {
-        min-height: auto;
-        padding: 36px 16px;
+@media (max-width: 1100px) {
+    .login-distribucion {
+        max-width: 900px;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .login-publicidad img {
+        max-width: 360px;
+        max-height: 420px;
+    }
+}
+
+@media (max-width: 700px) {
+    .login-cabecera {
+        padding: 30px 16px 65px;
+    }
+
+    .login-distribucion {
+        padding: 20px 16px 32px;
     }
 
     .login-contenedor {
         grid-template-columns: 1fr;
     }
 
+    .login-publicidad img {
+        max-width: 280px;
+        max-height: 340px;
+    }
+
+    .login-lateral,
+    .login-formulario {
+        padding: 30px 24px;
+    }
+
     .login-lateral {
-        padding: 30px;
         gap: 30px;
     }
 
-    .login-presentacion h1 {
+    .login-presentacion h1,
+    .login-presentacion h2 {
         font-size: 1.8rem;
-    }
-
-    .login-formulario {
-        padding: 36px 28px;
     }
 }
 
@@ -322,4 +439,20 @@
     .login-boton:hover:not(:disabled) {
         transform: none;
     }
+}
+
+.login-ver {
+    right: 14px;
+    font-size: 1.1rem;
+}
+
+.login-error {
+    margin: 8px 0 0;
+    color: #9a3026;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.login-formulario input[type="date"] {
+    color-scheme: light;
 }
