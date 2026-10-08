@@ -41,6 +41,16 @@
 
         <input type="text" class="form-control" formControlName="ciudad" placeholder="Ciudad">
         <input type="text" class="form-control" formControlName="departamento" placeholder="Departamento">
+
+        <div formArrayName="servicios">
+            @for(s of LISTA_SERVICIOS; track $index) {
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch"
+                           [id]="s" [formControlName]="$index">
+                    <label class="form-check-label" [for]="s">{{s}}</label>
+                </div>
+            }
+        </div>
     </form>
 
     @if (listaAlojamiento) {

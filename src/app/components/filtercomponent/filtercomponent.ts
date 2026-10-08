@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, DestroyRef, inject} from "@angular/core";
 import {Alojamiento, TipoAlojamiento} from "../../model/alojamientomodel";
 import {FiltroAlojamiento} from "../../model/filtroalojamientomodel";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {debounceTime, filter, map} from "rxjs";
+import {debounceTime, filter, map, Observable, startWith, switchMap} from "rxjs";
 import {Alojamientoservice} from "../../services/alojamientoservice";
 
 @Component({
@@ -15,6 +15,8 @@ import {Alojamientoservice} from "../../services/alojamientoservice";
 export class Filtercomponent {
     cdr:ChangeDetectorRef = inject(ChangeDetectorRef);
     alojamientoService :Alojamientoservice = inject(Alojamientoservice);
+    readonly LISTA_SERVICIOS = ["Wi-Fi", "Cocina", "Parqueadero", "Televisión", "Lavadora", "Piscina",
+    "Aire acondicionado", "BBQ", "Chimenea", "Gimnasio"];
 
     private destroyRef = inject(DestroyRef);
     listaAlojamiento?:Alojamiento[];
@@ -34,6 +36,8 @@ export class Filtercomponent {
         tipo: new FormControl<TipoAlojamiento | ''>('', { nonNullable: true }),
         ciudad: new FormControl('', { nonNullable: true }),
         departamento: new FormControl('', { nonNullable: true }),
+
+        servicios: new FormArray(this.LISTA_SERVICIOS.map(() => new FormControl(false, { nonNullable: true })))
     });
 
     tipos: TipoAlojamiento[] = ['Apartamento', 'Casa', 'Cabaña'];
@@ -60,16 +64,19 @@ export class Filtercomponent {
         this.vincularToggle(this.form.controls.usarPrecioMax, this.form.controls.precioMax);
         this.vincularToggle(this.form.controls.usarHuespedes, this.form.controls.numeroHuespedes);
 
-        this.actualizarLista({});
-
         this.form.valueChanges
             .pipe(
                 debounceTime(300),
                 filter(() => this.form.valid),
                 map(() => this.construirFiltro()),
+                startWith({} as FiltroAlojamiento),
+                switchMap((f :FiltroAlojamiento) => this.actualizarLista(f)),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe(filtro => this.actualizarLista(filtro));
+            .subscribe(lista => {
+                this.listaAlojamiento = lista;
+                this.cdr.markForCheck();
+            });
     }
 
     private construirFiltro(): FiltroAlojamiento {
@@ -81,14 +88,15 @@ export class Filtercomponent {
             tipo: v.tipo || undefined,
             ciudad: v.ciudad || undefined,
             departamento: v.departamento || undefined,
+            servicios: this.LISTA_SERVICIOS.filter((s,i)=>this.form.controls.servicios.value[i])
         };
     }
 
-    private actualizarLista(filtro : FiltroAlojamiento) : void {
-        this.alojamientoService.getAlojamientosByFilter(filtro).subscribe((data :Alojamiento[]) => {
-            this.listaAlojamiento = data;
-            this.cdr.markForCheck();
-        })
+    private actualizarLista(filtro : FiltroAlojamiento) :Observable<Alojamiento[]> {
+        return this.alojamientoService.getAlojamientosByFilter(filtro);
     }
 
+    private crearServicioFormControl() : FormControl<boolean> {
+        return new FormControl(true, { nonNullable: true })
+    }
 }
