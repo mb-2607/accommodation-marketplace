@@ -7,6 +7,7 @@ import {
     autenticacionGuard,
     visitanteGuard
 } from './guards/autenticacion-guard';
+import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
 
 const routes: Routes = [
     {
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: 'login',
         component: Logincomponent,
         canActivate: [visitanteGuard]
+    },
+    {
+        path: 'filter',
+        component: Filtercomponent
     },
     {
         path: '',
