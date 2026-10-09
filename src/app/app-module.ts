@@ -12,6 +12,7 @@ import { Cotizacioncomponent } from "./components/cotizacioncomponent/cotizacion
 import { Logincomponent } from "./components/loggincomponent/loggincomponent";
 import { provideHttpClient } from "@angular/common/http";
 import { Filtercomponent } from "./components/filtercomponent/filtercomponent";
+import { Confirmarreservacomponent } from "./components/confirmarreservacomponent/confirmarreservacomponent";
 import { Reservacomponent } from "./components/reservacomponent/reservacomponent";
 
 @NgModule({
@@ -25,6 +26,7 @@ import { Reservacomponent } from "./components/reservacomponent/reservacomponent
     Cotizacioncomponent,
     Logincomponent,
     Filtercomponent,
+    Confirmarreservacomponent,
     Reservacomponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],

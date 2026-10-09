@@ -1,0 +1,106 @@
+<form class="container mx-5" [formGroup]="form" (ngSubmit)="reservar()">
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Id Usuario</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="userId" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Nombre huésped</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="userName" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Email</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="email" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Id del Alojamiento</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="idAlojamiento" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Nombre Alojamiento</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="nombreAlojamiento" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Fecha llegada</p>
+        </div>
+        <div class="col-10">
+            <input type="date" class="form-control" formControlName="fechaLlegada" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Fecha salida</p>
+        </div>
+        <div class="col-10">
+            <input type="date" class="form-control" formControlName="fechaSalida" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Huéspedes</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="numeroHuespedes" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Noches</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="numeroNoches" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Total</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="precioTotal" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <p>Estado</p>
+        </div>
+        <div class="col-10">
+            <input type="text" class="form-control" formControlName="estado" placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-1">
+            <button class="btn btn-explorar" type="submit" [disabled]="form.invalid">Reservar</button>
+        </div>
+    </div>
+</form>
