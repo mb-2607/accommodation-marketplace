@@ -8,6 +8,7 @@ import {
     visitanteGuard
 } from './guards/autenticacion-guard';
 import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
+import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
 
 const routes: Routes = [
     {
@@ -23,6 +24,10 @@ const routes: Routes = [
     {
         path: 'filter',
         component: Filtercomponent
+    },
+    {
+        path: 'reservar',
+        component: Reservacomponent
     },
     {
         path: '',

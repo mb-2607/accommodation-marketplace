@@ -7,11 +7,12 @@ import { Iniciocomponent } from "./components/iniciocomponent/iniciocomponent";
 import { Navbarcomponent } from "./components/navbarcomponent/navbarcomponent";
 import { Mapacomponent } from "./components/mapacomponent/mapacomponent";
 import { Footercomponent } from "./components/footercomponent/footercomponent";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Cotizacioncomponent } from "./components/cotizacioncomponent/cotizacioncomponent";
 import { Logincomponent } from "./components/loggincomponent/loggincomponent";
 import { provideHttpClient } from "@angular/common/http";
 import { Filtercomponent } from "./components/filtercomponent/filtercomponent";
+import { Reservacomponent } from "./components/reservacomponent/reservacomponent";
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { Filtercomponent } from "./components/filtercomponent/filtercomponent";
     Cotizacioncomponent,
     Logincomponent,
     Filtercomponent,
+    Reservacomponent,
   ],
-    imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
   bootstrap: [App],
 })
