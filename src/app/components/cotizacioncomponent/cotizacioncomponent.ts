@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Component, inject, Input} from "@angular/core";
 import {Alojamiento} from "../../model/alojamientomodel";
 import {Cotizacionservice} from "../../services/cotizacionservice";
 import {Cotizacion, CotizacionInvalida, ErrorType} from "../../model/cotizacionmodel";
+import {ReservaService} from "../../services/reservaservice";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-cotizacioncomponent",
@@ -13,6 +15,9 @@ export class Cotizacioncomponent {
     @Input({ required: true }) alojamiento?: Alojamiento;
 
     cdr :ChangeDetectorRef = inject(ChangeDetectorRef);
+    reservaService :ReservaService = inject(ReservaService);
+    router :Router = inject(Router);
+
     cotizacionService: Cotizacionservice = inject(Cotizacionservice);
     fechaInicio :string = new Date().toISOString().split('T')[0];
     fechaFin :string = new Date().toISOString().split('T')[0];
@@ -55,5 +60,12 @@ export class Cotizacioncomponent {
 
         }
         this.cdr.markForCheck();
+    }
+
+    irAReservar(){
+        if(this.cotizacion && 'total' in this.cotizacion){
+            this.reservaService.seleccionarCotizacion(this.cotizacion);
+            this.router.navigate(['/reservar']);
+        }
     }
 }
