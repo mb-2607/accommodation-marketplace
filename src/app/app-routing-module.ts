@@ -8,7 +8,7 @@ import {
     visitanteGuard
 } from './guards/autenticacion-guard';
 import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
-import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
+import {Confirmarreservacomponent} from "./components/confirmarreservacomponent/confirmarreservacomponent";
 
 const routes: Routes = [
     {
@@ -26,8 +26,8 @@ const routes: Routes = [
         component: Filtercomponent
     },
     {
-        path: 'reservar',
-        component: Reservacomponent
+        path: 'confirmar-reserva',
+        component: Confirmarreservacomponent
     },
     {
         path: '',

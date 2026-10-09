@@ -12,7 +12,7 @@ import { Cotizacioncomponent } from "./components/cotizacioncomponent/cotizacion
 import { Logincomponent } from "./components/loggincomponent/loggincomponent";
 import { provideHttpClient } from "@angular/common/http";
 import { Filtercomponent } from "./components/filtercomponent/filtercomponent";
-import { Reservacomponent } from "./components/reservacomponent/reservacomponent";
+import { Confirmarreservacomponent } from "./components/confirmarreservacomponent/confirmarreservacomponent";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { Reservacomponent } from "./components/reservacomponent/reservacomponent
     Cotizacioncomponent,
     Logincomponent,
     Filtercomponent,
-    Reservacomponent,
+    Confirmarreservacomponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],

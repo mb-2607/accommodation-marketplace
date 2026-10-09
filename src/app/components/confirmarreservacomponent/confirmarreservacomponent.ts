@@ -9,12 +9,12 @@ import {filter, switchMap, take, tap} from "rxjs";
 import {Alojamientoservice} from "../../services/alojamientoservice";
 
 @Component({
-  selector: "app-reservacomponent",
+  selector: "app-confirmarreservacomponent",
   standalone: false,
-  styleUrl: "./reservacomponent.css",
-  templateUrl: "./reservacomponent.html",
+  styleUrl: "./confirmarreservacomponent.css",
+  templateUrl: "./confirmarreservacomponent.html",
 })
-export class Reservacomponent implements OnInit{
+export class Confirmarreservacomponent implements OnInit{
     private cdr :ChangeDetectorRef = inject(ChangeDetectorRef);
     private reservaService :ReservaService = inject(ReservaService);
     private authService :AutenticacionService = inject(AutenticacionService);

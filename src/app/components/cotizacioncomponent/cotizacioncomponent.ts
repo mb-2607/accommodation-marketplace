@@ -65,7 +65,7 @@ export class Cotizacioncomponent {
     irAReservar(){
         if(this.cotizacion && 'total' in this.cotizacion){
             this.reservaService.seleccionarCotizacion(this.cotizacion);
-            this.router.navigate(['/reservar']);
+            this.router.navigate(['/confirmar-reserva']);
         }
     }
 }
