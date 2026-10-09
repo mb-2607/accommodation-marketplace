@@ -8,6 +8,7 @@ import {
     visitanteGuard
 } from './guards/autenticacion-guard';
 import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
+import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
 
 const routes: Routes = [
     {
@@ -35,7 +36,16 @@ const routes: Routes = [
             {
                 path: 'alojamiento/:id',
                 component: Alojamientopagecomponent
-            }
+            },
+            {
+                path: 'reservas',
+                component: Reservacomponent
+            },
+            {
+                path: 'alojamientos',
+                redirectTo: 'reservas',
+                pathMatch: 'full'
+            },
         ]
     },
     {
