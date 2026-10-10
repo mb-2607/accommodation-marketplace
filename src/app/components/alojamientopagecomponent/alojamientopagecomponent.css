@@ -208,3 +208,108 @@
         padding: 22px;
     }
 }
+
+.detalle-resenas {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid #eee5d5;
+}
+
+.cabecera-resenas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.etiqueta-resenas {
+    color: #92701b;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.cabecera-resenas h2 {
+    margin: 8px 0 0;
+    color: #171717;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 750;
+}
+
+.cantidad-resenas {
+    padding: 8px 14px;
+    border: 1px solid #e8dab7;
+    border-radius: 30px;
+    background: #faf6eb;
+    color: #80621b;
+    font-size: 0.8rem;
+}
+
+.tarjeta-resena {
+    height: 100%;
+    padding: 22px;
+    border: 1px solid #eee5d5;
+    border-radius: 18px;
+    background: #fffdfa;
+}
+
+.resena-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar-resena {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    background: #171717;
+    color: #e4c66c;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.resena-usuario h3 {
+    margin: 0 0 5px;
+    color: #171717;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.resena-calificacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #80621b;
+    font-size: 0.85rem;
+    font-weight: 650;
+}
+
+.resena-calificacion i {
+    color: #bd9328;
+}
+
+.resena-comentario {
+    margin: 0;
+    color: #606060;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.estado-resenas {
+    margin: 0;
+    color: #777;
+    line-height: 1.7;
+}
+
+.error-resenas {
+    color: #a83228;
+}
