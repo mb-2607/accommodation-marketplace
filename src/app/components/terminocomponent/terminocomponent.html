@@ -1,0 +1,57 @@
+@if (activo) {
+    <div class="modal-overlay" [class.animando-exit]="animandoExit">
+
+        <div class="modal-contenedor p-4 p-md-5 rounded-4 shadow-lg"
+             [class.animando-exit]="animandoExit"
+             [class.animando-shake]="animandoShake">
+
+            <div class="text-center mb-4">
+                <div class="icono-modal-box mx-auto mb-3">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+                <h3 class="fw-bold text-dark mb-1">Términos y Condiciones del Servicio</h3>
+                <p class="text-muted small mb-0">Bienvenido a <strong>Reservas LR</strong>. Por favor, revisa y acepta nuestros términos y condiciones para ingresar.</p>
+            </div>
+
+            <div class="terminos-scroll p-3 mb-4 rounded-3 border">
+                <ul class="lista-terminos ps-0 mb-0">
+                    <li class="mb-3">
+                        <strong>Vigencia del contrato:</strong> El acuerdo comienza al acceder a la plataforma y continúa hasta que el usuario o Reservas LR lo cancelen.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Reglas de conducta:</strong> Los usuarios deben actuar con integridad, comunicarse con respeto, no suplantar identidades y cumplir las políticas contra la discriminación.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Riesgos del servicio:</strong> Los anfitriones y huéspedes asumen los riesgos inherentes de sus interacciones y de la oferta de servicios en persona o en línea.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Evaluaciones y opiniones:</strong> Las opiniones y calificaciones deben ser precisas y no incluir lenguaje ofensivo o discriminatorio. Reservas LR se reserva el derecho de moderar comentarios que violen estas normas.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Cancelaciones y reembolsos:</strong> Las políticas de cancelación varían según la duración de la estancia y el tipo elegido por el anfitrión (flexible, moderada o estricta), así como la cobertura de AirCover para huéspedes.
+                    </li>
+                    <li>
+                        <strong>Medidas ante infracciones:</strong> Reservas LR puede suspender cuentas, eliminar anuncios o cancelar reservaciones si detecta incumplimientos de sus normas o requerimientos legales.
+                    </li>
+                </ul>
+            </div>
+
+            @if (error) {
+                <div class="alert alert-danger d-flex align-items-center gap-2 mb-4 py-2 px-3 small alerta-error" role="alert">
+                    <i class="fa-solid fa-circle-exclamation fs-5 flex-shrink-0"></i>
+                    <div>Debes aceptar los términos y condiciones para acceder a la plataforma y explorar los alojamientos.</div>
+                </div>
+            }
+
+            <div class="d-flex flex-column flex-sm-row justify-content-end gap-3">
+                <button type="button" class="btn btn-rechazar w-100 w-sm-auto" (click)="rechazar()">
+                    <i class="fa-solid fa-xmark me-1"></i> No estoy de acuerdo
+                </button>
+                <button type="button" class="btn btn-aceptar w-100 w-sm-auto" (click)="aceptar()">
+                    <i class="fa-solid fa-check me-1"></i> Sí, estoy de acuerdo
+                </button>
+            </div>
+
+        </div>
+    </div>
+}
