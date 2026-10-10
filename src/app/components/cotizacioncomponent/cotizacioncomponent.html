@@ -1,0 +1,218 @@
+<section class="cotizacion-card">
+
+    <header class="cotizacion-cabecera">
+    <span class="cotizacion-etiqueta">
+      PLANEA TU ESTANCIA
+    </span>
+
+        <h2>Tu próxima escapada</h2>
+
+        @if (alojamiento) {
+            <p class="cotizacion-precio">
+                <strong>
+                    {{ alojamiento.precioNoche | currency:'COP':'code':'1.0-0' }}
+                </strong>
+                <span>por noche</span>
+            </p>
+        }
+
+        <p class="cotizacion-introduccion">
+            Selecciona tus fechas y conoce el valor de tu estancia.
+        </p>
+    </header>
+
+    <div class="cotizacion-contenido">
+
+        @if (isFechaInvalida) {
+            <div class="row">
+                <div class="col-12">
+                    <p class="fecha-error" role="alert">
+                        La llegada debe ser hoy o una fecha posterior.
+                        La salida debe ser posterior a la llegada.
+                    </p>
+                </div>
+            </div>
+        }
+
+        <div class="row g-3 fechas-reserva">
+            <div class="col-12 col-md-6">
+                <label for="fechaInicio" class="form-label">
+                    Fecha de llegada
+                </label>
+
+                <input
+                        type="date"
+                        id="fechaInicio"
+                        class="form-control campo-fecha"
+                        [(ngModel)]="fechaInicio"
+                        [min]="fechaHoy"
+                        (ngModelChange)="cotizacionValida = false"
+                        required>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label for="fechaFin" class="form-label">
+                    Fecha de salida
+                </label>
+
+                <input
+                        type="date"
+                        id="fechaFin"
+                        class="form-control campo-fecha"
+                        [(ngModel)]="fechaFin"
+                        [min]="fechaMinimaSalida"
+                        (ngModelChange)="cotizacionValida = false"
+                        required>
+            </div>
+        </div>
+
+        <div class="cotizacion-huespedes">
+            <div class="huespedes-texto">
+        <span class="cotizacion-label">
+          <i class="fa-solid fa-users" aria-hidden="true"></i>
+          Huéspedes
+        </span>
+
+                @if (alojamiento) {
+                    <small>
+                        Capacidad máxima: {{ alojamiento.capacidad }}
+                    </small>
+                }
+            </div>
+
+            <div class="huespedes-controles">
+                <button
+                        type="button"
+                        class="boton-cantidad"
+                        aria-label="Reducir número de huéspedes"
+                        [disabled]="cantidadHuespedes <= 1"
+                        (click)="restCantidadHuespedes()">
+                    <i class="fa-solid fa-minus" aria-hidden="true"></i>
+                </button>
+
+                <span class="huespedes-cantidad" aria-live="polite">
+          {{ cantidadHuespedes }}
+        </span>
+
+                <button
+                        type="button"
+                        class="boton-cantidad"
+                        aria-label="Aumentar número de huéspedes"
+                        [disabled]="!alojamiento || cantidadHuespedes >= alojamiento.capacidad"
+                        (click)="addCantidadHuespedes()">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        @if (isHuespedesMenorACero) {
+            <div class="cotizacion-alerta" role="alert">
+                El número de huéspedes debe ser mayor a cero.
+            </div>
+        } @else if (isHuespedesMayorACapacidad) {
+            <div class="cotizacion-alerta" role="alert">
+                El número de huéspedes no puede superar
+                la capacidad del alojamiento.
+            </div>
+        }
+
+        <button
+                type="button"
+                class="cotizacion-boton"
+                (click)="realizarCotizacion()">
+            Cotizar
+            <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+        </button>
+
+        <p class="cotizacion-nota">
+            Consulta el total antes de confirmar tu reserva.
+        </p>
+
+        @if (cotizacionValida && cotizacion) {
+
+            <section class="cotizacion-resumen" aria-label="Resumen de cotización">
+
+                <div class="resumen-cabecera">
+          <span class="resumen-icono">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+          </span>
+
+                    <div>
+                        <h3>Tu cotización está lista</h3>
+                        <p>
+                            {{ cotizacion.numeroNoches }}
+                            {{ cotizacion.numeroNoches === 1 ? 'noche' : 'noches' }}
+                            ·
+                            {{ cotizacion.numeroHuespedes }}
+                            {{ cotizacion.numeroHuespedes === 1 ? 'huésped' : 'huéspedes' }}
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="resumen-fechas">
+                    <div>
+                        <span>Llegada</span>
+                        <strong>
+                            {{ cotizacion.fechaLlegada | date:'dd/MM/yyyy' }}
+                        </strong>
+                    </div>
+
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+
+                    <div>
+                        <span>Salida</span>
+                        <strong>
+                            {{ cotizacion.fechaSalida | date:'dd/MM/yyyy' }}
+                        </strong>
+                    </div>
+                </div>
+
+                <dl class="resumen-valores">
+                    <div class="resumen-fila">
+                        <dt>
+                            {{ cotizacion.precioNoche | currency:'COP':'code':'1.0-0' }}
+                            × {{ cotizacion.numeroNoches }} noches
+                        </dt>
+                        <dd>
+                            {{ cotizacion.subtotal | currency:'COP':'code':'1.0-0' }}
+                        </dd>
+                    </div>
+
+                    <div class="resumen-fila">
+                        <dt>Tarifa de limpieza</dt>
+                        <dd>
+                            {{ cotizacion.tarifaLimpieza | currency:'COP':'code':'1.0-0' }}
+                        </dd>
+                    </div>
+
+                    <div class="resumen-fila">
+                        <dt>Tarifa de servicio · 10 %</dt>
+                        <dd>
+                            {{ cotizacion.tarifaServicio | currency:'COP':'code':'1.0-0' }}
+                        </dd>
+                    </div>
+
+                    <div class="resumen-total">
+                        <dt>Total de la estancia</dt>
+                        <dd>
+                            {{ cotizacion.total | currency:'COP':'code':'1.0-0' }}
+                        </dd>
+                    </div>
+                </dl>
+
+                <button
+                        type="button"
+                        class="cotizacion-boton boton-reservar"
+                        (click)="irAReservar()">
+                    Continuar con mi reserva
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+
+            </section>
+
+        }
+
+    </div>
+
+</section>

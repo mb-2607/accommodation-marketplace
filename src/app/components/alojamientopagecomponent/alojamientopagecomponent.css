@@ -1,0 +1,315 @@
+:host {
+    display: block;
+}
+
+.detalle-pagina,
+.detalle-pagina * {
+    box-sizing: border-box;
+}
+
+.detalle-pagina {
+    min-height: 75vh;
+    padding: 36px 0 72px;
+    background: #f7f6f2;
+}
+
+.detalle-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: #92701b;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.detalle-volver:hover {
+    color: #171717;
+}
+
+.detalle-alojamiento {
+    overflow: hidden;
+    border: 1px solid #e9e3d6;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+}
+
+.detalle-imagen {
+    position: relative;
+    background: #eee9dd;
+}
+
+.detalle-imagen img {
+    display: block;
+    width: 100%;
+    height: clamp(260px, 30vw, 420px);
+    object-fit: cover;
+}
+
+.detalle-tipo {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(23, 23, 23, 0.9);
+    color: #e4c66c;
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+.detalle-contenido {
+    padding: 30px;
+}
+
+.detalle-ubicacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.detalle-ubicacion span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.detalle-ubicacion i {
+    color: #a67c1c;
+}
+
+.detalle-calificacion {
+    color: #171717;
+    font-weight: 700;
+}
+
+.detalle-contenido h1 {
+    margin: 0 0 12px;
+    color: #171717;
+    font-size: clamp(1.65rem, 2.8vw, 2.4rem);
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.detalle-direccion {
+    margin-bottom: 24px;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.detalle-caracteristicas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 22px;
+    padding: 20px 0;
+    margin-bottom: 28px;
+    border-top: 1px solid #eee9df;
+    border-bottom: 1px solid #eee9df;
+}
+
+.detalle-caracteristicas span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+.detalle-caracteristicas i {
+    color: #a67c1c;
+}
+
+.detalle-contenido h2 {
+    margin: 28px 0 14px;
+    color: #252525;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.detalle-descripcion {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.85;
+}
+
+.detalle-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.detalle-servicios li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid #e9dfc6;
+    border-radius: 10px;
+    background: #faf6ea;
+    color: #80682b;
+    font-size: 0.82rem;
+}
+
+.detalle-reglas {
+    padding-left: 20px;
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.9;
+}
+
+.detalle-estado {
+    padding: 60px 24px;
+    border: 1px solid #e9e3d6;
+    border-radius: 24px;
+    background: #fff;
+    color: #666;
+    text-align: center;
+}
+
+.detalle-estado > i {
+    margin-bottom: 20px;
+    color: #a67c1c;
+    font-size: 2rem;
+}
+
+.detalle-estado h1 {
+    color: #171717;
+    font-size: 1.6rem;
+}
+
+.detalle-volver:focus-visible {
+    outline: 2px solid #a67c1c;
+    outline-offset: 4px;
+}
+
+@media (min-width: 992px) {
+    .detalle-cotizacion {
+        position: sticky;
+        top: 100px;
+    }
+}
+
+@media (max-width: 575px) {
+    .detalle-pagina {
+        padding: 24px 0 48px;
+    }
+
+    .detalle-contenido {
+        padding: 22px;
+    }
+}
+
+.detalle-resenas {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid #eee5d5;
+}
+
+.cabecera-resenas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.etiqueta-resenas {
+    color: #92701b;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.cabecera-resenas h2 {
+    margin: 8px 0 0;
+    color: #171717;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 750;
+}
+
+.cantidad-resenas {
+    padding: 8px 14px;
+    border: 1px solid #e8dab7;
+    border-radius: 30px;
+    background: #faf6eb;
+    color: #80621b;
+    font-size: 0.8rem;
+}
+
+.tarjeta-resena {
+    height: 100%;
+    padding: 22px;
+    border: 1px solid #eee5d5;
+    border-radius: 18px;
+    background: #fffdfa;
+}
+
+.resena-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar-resena {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    background: #171717;
+    color: #e4c66c;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.resena-usuario h3 {
+    margin: 0 0 5px;
+    color: #171717;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.resena-calificacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #80621b;
+    font-size: 0.85rem;
+    font-weight: 650;
+}
+
+.resena-calificacion i {
+    color: #bd9328;
+}
+
+.resena-comentario {
+    margin: 0;
+    color: #606060;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.estado-resenas {
+    margin: 0;
+    color: #777;
+    line-height: 1.7;
+}
+
+.error-resenas {
+    color: #a83228;
+}
