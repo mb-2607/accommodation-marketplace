@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <h2>Mis Reservas</h2>
+    </div>
+    @if(usuarioActivo){
+        <div class="accordion" id="accordionReservas">
+        @for (r of listaReservas; track r.id) {
+            <app-reservaitemcomponent [reserva]="r"></app-reservaitemcomponent>
+        }
+        </div>
+    } @else {
+        <p>=C</p>
+    }
+</div>

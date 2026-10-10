@@ -14,6 +14,8 @@ import { provideHttpClient } from "@angular/common/http";
 import { Filtercomponent } from "./components/filtercomponent/filtercomponent";
 import { Confirmarreservacomponent } from "./components/confirmarreservacomponent/confirmarreservacomponent";
 import { Reservacomponent } from "./components/reservacomponent/reservacomponent";
+import { Misreservascomponent } from "./components/misreservascomponent/misreservascomponent";
+import { Reservaitemcomponent } from "./components/reservaitemcomponent/reservaitemcomponent";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { Reservacomponent } from "./components/reservacomponent/reservacomponent
     Filtercomponent,
     Confirmarreservacomponent,
     Reservacomponent,
+    Misreservascomponent,
+    Reservaitemcomponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],

@@ -10,6 +10,7 @@ import {
 import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
 import {Confirmarreservacomponent} from "./components/confirmarreservacomponent/confirmarreservacomponent";
 import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
+import {Misreservascomponent} from "./components/misreservascomponent/misreservascomponent";
 
 const routes: Routes = [
     {
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
         path: 'confirmar-reserva',
         component: Confirmarreservacomponent
+    },
+    {
+        path: 'mis-reservas',
+        component: Misreservascomponent
     },
     {
         path: '',
