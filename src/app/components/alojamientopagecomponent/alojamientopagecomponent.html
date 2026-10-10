@@ -96,10 +96,78 @@
                                         <li>{{ regla }}</li>
                                     }
                                 </ul>
+
+                                <section class="detalle-resenas" aria-labelledby="titulo-resenas">
+                                    <div class="cabecera-resenas">
+                                        <div>
+                         <span class="etiqueta-resenas">
+                             EXPERIENCIAS DE NUESTROS HUÉSPEDES
+                           </span>
+
+                                            <h2 id="titulo-resenas">Reseñas del alojamiento</h2>
+                                        </div>
+
+                                        @if (!cargandoResenas && !errorResenas) {
+                                            <span class="cantidad-resenas">
+                                                {{ resenas.length }}
+                                                {{ resenas.length === 1 ? 'reseña' : 'reseñas' }}
+                                            </span>
+                                        }
+                                    </div>
+
+                                    @if (cargandoResenas) {
+                                        <p class="estado-resenas" role="status">
+                                            Cargando reseñas…
+                                        </p>
+                                    } @else if (errorResenas) {
+                                        <p class="error-resenas" role="alert">
+                                            {{ errorResenas }}
+                                        </p>
+                                    } @else {
+                                        <div class="row g-3">
+                                            @for (resena of resenas; track resena.id) {
+                                                <div class="col-12 col-md-6">
+                                                    <article class="tarjeta-resena">
+                                                        <div class="resena-usuario">
+                            <span class="avatar-resena" aria-hidden="true">
+                                {{ resena.usuario.charAt(0) }}
+                            </span>
+
+                                                            <div>
+                                                                <h3>{{ resena.usuario }}</h3>
+
+                                                                <span class="resena-calificacion">
+                                    <i
+                                            class="fa-solid fa-star"
+                                            aria-hidden="true">
+                                    </i>
+
+                                                                    {{ resena.calificacion }} / 5
+                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <p class="resena-comentario">
+                                                            {{ resena.comentario }}
+                                                        </p>
+                                                    </article>
+                                                </div>
+                                            } @empty {
+                                                <div class="col-12">
+                                                    <p class="estado-resenas">
+                                                        Este alojamiento todavía no tiene reseñas.
+                                                    </p>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </section>
+
                             </div>
 
                         </article>
                     </div>
+
 
                     <div class="col-12 col-lg-5">
                         <div class="detalle-cotizacion">
