@@ -34,6 +34,7 @@ export class Alojamientoservice {
         return this.getAlojamientos().pipe(
             map((alojamientos: Alojamiento[]) =>
                 alojamientos.filter((a: Alojamiento) => filtro.ciudad === undefined || a.ciudad === filtro.ciudad)
+                    .filter((a: Alojamiento) => filtro.departamento === undefined || a.departamento >= filtro.departamento)
                     .filter((a: Alojamiento) => filtro.huespedes === undefined || a.capacidad >= filtro.huespedes)
                     .filter((a: Alojamiento) => filtro.tipo === undefined || a.tipo === filtro.tipo)
                     .filter((a: Alojamiento) => filtro.precioMin === undefined || a.precioNoche >= filtro.precioMin)

@@ -3,6 +3,7 @@ import {TipoAlojamiento} from "./alojamientomodel";
 export interface FiltroAlojamiento {
     ciudad?: string;
     huespedes?: number;
+    departamento?: string;
     tipo?: TipoAlojamiento;
     precioMin?: number;
     precioMax?: number;

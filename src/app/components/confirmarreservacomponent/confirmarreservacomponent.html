@@ -1,0 +1,178 @@
+<form
+        class="container mx-5 reserva-formulario"
+        [formGroup]="form"
+        (ngSubmit)="reservar()">
+
+    <header class="reserva-cabecera">
+        <span class="reserva-etiqueta">TU PRÓXIMA EXPERIENCIA</span>
+        <h1>Confirma tu estancia</h1>
+        <p>Revisa los datos de tu reserva antes de continuar.</p>
+    </header>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-user-id">Id Usuario</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-user-id"
+                    type="text"
+                    class="form-control"
+                    formControlName="userId"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-nombre">Nombre huésped</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-nombre"
+                    type="text"
+                    class="form-control"
+                    formControlName="userName"
+                    placeholder="Nombre completo">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-email">Email</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-email"
+                    type="text"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="tucorreo@ejemplo.com">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-alojamiento-id">Id del alojamiento</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-alojamiento-id"
+                    type="text"
+                    class="form-control"
+                    formControlName="idAlojamiento"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-alojamiento-nombre">Nombre alojamiento</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-alojamiento-nombre"
+                    type="text"
+                    class="form-control"
+                    formControlName="nombreAlojamiento"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-llegada">Fecha llegada</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-llegada"
+                    type="date"
+                    class="form-control"
+                    formControlName="fechaLlegada"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-salida">Fecha salida</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-salida"
+                    type="date"
+                    class="form-control"
+                    formControlName="fechaSalida"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-huespedes">Huéspedes</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-huespedes"
+                    type="text"
+                    class="form-control"
+                    formControlName="numeroHuespedes"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-noches">Noches</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-noches"
+                    type="text"
+                    class="form-control"
+                    formControlName="numeroNoches"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-total">Total</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-total"
+                    type="text"
+                    class="form-control"
+                    formControlName="precioTotal"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-1">
+        <div class="col-2">
+            <label for="reserva-estado">Estado</label>
+        </div>
+        <div class="col-10">
+            <input
+                    id="reserva-estado"
+                    type="text"
+                    class="form-control"
+                    formControlName="estado"
+                    placeholder="">
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-1">
+            <button
+                    class="btn btn-explorar"
+                    type="submit"
+                    [disabled]="form.invalid">
+                Confirmar reserva
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+</form>

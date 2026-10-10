@@ -1,159 +1,159 @@
 <section
-  class="banner-publicidad"
-  aria-label="Publicidad de Reservas LR"
-  (mouseenter)="pausarPublicidad()"
-  (mouseleave)="iniciarPublicidad()">
+        class="banner-publicidad"
+        aria-label="Publicidad de Reservas LR"
+        (mouseenter)="pausarPublicidad()"
+        (mouseleave)="iniciarPublicidad()">
 
-  <article
-    *ngFor="let publicidad of publicidades; let i = index"
-    class="publicidad-slide"
-    [class.publicidad-activa]="indicePublicidad === i"
-    [attr.aria-hidden]="indicePublicidad !== i">
+    <article
+            *ngFor="let publicidad of publicidades; let i = index"
+            class="publicidad-slide"
+            [class.publicidad-activa]="indicePublicidad === i"
+            [attr.aria-hidden]="indicePublicidad !== i">
 
-    <img
-      [src]="publicidad.imagen"
-      [alt]="publicidad.alt"
-      class="publicidad-imagen">
+        <img
+                [src]="publicidad.imagen"
+                [alt]="publicidad.alt"
+                class="publicidad-imagen">
 
-    <div class="publicidad-overlay"></div>
+        <div class="publicidad-overlay"></div>
 
-    <div class="publicidad-contenido">
-      <div class="publicidad-texto">
+        <div class="publicidad-contenido">
+            <div class="publicidad-texto">
         <span class="publicidad-etiqueta">
           {{ publicidad.etiqueta }}
         </span>
 
-        <h2>
-          {{ publicidad.titulo }}
-          <span>{{ publicidad.destacado }}</span>
-        </h2>
+                <h2>
+                    {{ publicidad.titulo }}
+                    <span>{{ publicidad.destacado }}</span>
+                </h2>
 
-        <p class="publicidad-descripcion">
-          {{ publicidad.descripcion }}
-        </p>
-      </div>
-    </div>
+                <p class="publicidad-descripcion">
+                    {{ publicidad.descripcion }}
+                </p>
+            </div>
+        </div>
 
-  </article>
+    </article>
 </section>
 
 <section class="bienvenida">
-  <div class="container">
-    <div class="row align-items-center g-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
 
-      <div class="col-12 col-lg-5">
-        <div class="imagen-contenedor">
-          <img
-            [src]="imagenBienvenida"
-            [alt]="descripcionImagen"
-            class="imagen-bienvenida">
+            <div class="col-12 col-lg-5">
+                <div class="imagen-contenedor">
+                    <img
+                            [src]="imagenBienvenida"
+                            [alt]="descripcionImagen"
+                            class="imagen-bienvenida">
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-7">
+                <div class="contenido-bienvenida">
+                    <span class="etiqueta">Tu próxima experiencia comienza aquí</span>
+
+                    <h1>
+                        Bienvenido a <span>{{ nombreEmpresa }}</span>
+                    </h1>
+
+                    <p class="descripcion-principal">
+                        Somos una empresa dedicada a las reservas temporales de
+                        alojamientos en toda Colombia. Nos enfocamos en ofrecerte
+                        una atención cercana y una experiencia especial desde
+                        el momento en que eliges tu destino.
+                    </p>
+
+                    <p>
+                        Encuentra diferentes tipos de alojamientos según el número
+                        de huéspedes, el lugar que deseas visitar y la ocasión que
+                        quieres celebrar. Explora espacios con comodidades como
+                        piscina, jacuzzi, bar y mucho más.
+                    </p>
+
+                    <p class="mensaje-final">
+                        Elige el lugar ideal para descansar, compartir y crear
+                        momentos inolvidables.
+                    </p>
+
+                    <a
+                            class="btn-explorar"
+                            routerLink="/alojamientos">
+                        Explorar alojamientos
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
-      </div>
-
-      <div class="col-12 col-lg-7">
-        <div class="contenido-bienvenida">
-          <span class="etiqueta">Tu próxima experiencia comienza aquí</span>
-
-          <h1>
-            Bienvenido a <span>{{ nombreEmpresa }}</span>
-          </h1>
-
-          <p class="descripcion-principal">
-            Somos una empresa dedicada a las reservas temporales de
-            alojamientos en toda Colombia. Nos enfocamos en ofrecerte
-            una atención cercana y una experiencia especial desde
-            el momento en que eliges tu destino.
-          </p>
-
-          <p>
-            Encuentra diferentes tipos de alojamientos según el número
-            de huéspedes, el lugar que deseas visitar y la ocasión que
-            quieres celebrar. Explora espacios con comodidades como
-            piscina, jacuzzi, bar y mucho más.
-          </p>
-
-          <p class="mensaje-final">
-            Elige el lugar ideal para descansar, compartir y crear
-            momentos inolvidables.
-          </p>
-
-          <a
-            class="btn-explorar"
-            routerLink="/alojamientos">
-            Explorar alojamientos
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-
     </div>
-  </div>
 </section>
 
 <section class="seccion-carrusel">
-  <div class="container">
+    <div class="container">
 
-    <div class="cabecera-carrusel">
-      <div>
-        <span class="etiqueta">Alojamientos Destacados</span>
-        <h2>Reserva en uno de los lugares mejor calificados</h2>
-      </div>
+        <div class="cabecera-carrusel">
+            <div>
+                <span class="etiqueta">Alojamientos Destacados</span>
+                <h2>Reserva en uno de los lugares mejor calificados</h2>
+            </div>
 
-      <div
-        class="controles-carrusel"
-        *ngIf="alojamientosCarrusel.length > 0">
+            <div
+                    class="controles-carrusel"
+                    *ngIf="alojamientosCarrusel.length > 0">
 
-        <button
-          type="button"
-          aria-label="Alojamiento anterior"
-          (click)="anteriorImagen()">
-          &#8592;
-        </button>
+                <button
+                        type="button"
+                        aria-label="Alojamiento anterior"
+                        (click)="anteriorImagen()">
+                    &#8592;
+                </button>
 
-        <button
-          type="button"
-          aria-label="Alojamiento siguiente"
-          (click)="siguienteImagen()">
-          &#8594;
-        </button>
-      </div>
-    </div>
+                <button
+                        type="button"
+                        aria-label="Alojamiento siguiente"
+                        (click)="siguienteImagen()">
+                    &#8594;
+                </button>
+            </div>
+        </div>
 
-    <p *ngIf="cargandoCarrusel" role="status">
-      Cargando alojamientos…
-    </p>
+        <p *ngIf="cargandoCarrusel" role="status">
+            Cargando alojamientos…
+        </p>
 
-    <p *ngIf="errorCarrusel" role="alert">
-      {{ errorCarrusel }}
-    </p>
+        <p *ngIf="errorCarrusel" role="alert">
+            {{ errorCarrusel }}
+        </p>
 
-    <p
-      *ngIf="!cargandoCarrusel && !errorCarrusel
+        <p
+                *ngIf="!cargandoCarrusel && !errorCarrusel
         && alojamientosCarrusel.length === 0">
-      No hay alojamientos disponibles por el momento.
-    </p>
+            No hay alojamientos disponibles por el momento.
+        </p>
 
-    <ng-container *ngIf="alojamientosCarrusel.length > 0">
-      <div
-        class="carrusel-flex"
-        role="group"
-        aria-label="Alojamientos destacados">
+        <ng-container *ngIf="alojamientosCarrusel.length > 0">
+            <div
+                    class="carrusel-flex"
+                    role="group"
+                    aria-label="Alojamientos destacados">
 
-        <button
-          *ngFor="let alojamiento of alojamientosCarrusel; let i = index"
-          type="button"
-          class="tarjeta-carrusel"
-          [class.activa]="indiceCarrusel === i"
-          [attr.aria-pressed]="indiceCarrusel === i"
-          [attr.aria-label]="'Seleccionar ' + alojamiento.nombre"
-          (click)="seleccionarImagen(i)">
+                <button
+                        *ngFor="let alojamiento of alojamientosCarrusel; let i = index"
+                        type="button"
+                        class="tarjeta-carrusel"
+                        [class.activa]="indiceCarrusel === i"
+                        [attr.aria-pressed]="indiceCarrusel === i"
+                        [attr.aria-label]="'Seleccionar ' + alojamiento.nombre"
+                        (click)="seleccionarImagen(i)">
 
-          <img
-            [src]="alojamiento.imagenPrincipal"
-            [alt]="alojamiento.nombre"
-            loading="lazy">
+                    <img
+                            [src]="alojamiento.imagenPrincipal"
+                            [alt]="alojamiento.nombre"
+                            loading="lazy">
 
-          <span class="texto-tarjeta">
+                    <span class="texto-tarjeta">
             <span class="ciudad-tarjeta">
               {{ alojamiento.ciudad }}
             </span>
@@ -165,33 +165,33 @@
 
               <span class="precio-tarjeta">
                 {{
-                  alojamiento.precioNoche
-                    | currency:'COP':'$':'1.0-0'
-                }}
-                / noche
+                      alojamiento.precioNoche
+                          | currency:'COP':'$':'1.0-0'
+                  }}
+                  / noche
               </span>
             </span>
           </span>
 
-        </button>
-      </div>
+                </button>
+            </div>
 
-      <div class="pie-carrusel">
-        <p class="contador-carrusel" aria-live="polite">
-          {{ indiceCarrusel + 1 }} /
-          {{ alojamientosCarrusel.length }}
-          — {{ alojamientosCarrusel[indiceCarrusel].nombre }}
-        </p>
+            <div class="pie-carrusel">
+                <p class="contador-carrusel" aria-live="polite">
+                    {{ indiceCarrusel + 1 }} /
+                    {{ alojamientosCarrusel.length }}
+                    — {{ alojamientosCarrusel[indiceCarrusel].nombre }}
+                </p>
 
 
-      </div>
-    </ng-container>
+            </div>
+        </ng-container>
 
-  </div>
+    </div>
 </section>
 
 <section class="seccion-destinos">
-  <div class="container">
-    <app-mapa-colombia></app-mapa-colombia>
-  </div>
+    <div class="container">
+        <app-mapa-colombia></app-mapa-colombia>
+    </div>
 </section>

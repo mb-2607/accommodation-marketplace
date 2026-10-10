@@ -1,15 +1,72 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {Alojamientopagecomponent} from "./components/alojamientopagecomponent/alojamientopagecomponent";
-import {Iniciocomponent} from "./components/iniciocomponent/iniciocomponent";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {Iniciocomponent} from './components/iniciocomponent/iniciocomponent';
+import {Logincomponent} from './components/loggincomponent/loggincomponent';
+import {Alojamientopagecomponent} from './components/alojamientopagecomponent/alojamientopagecomponent';
+import {
+    autenticacionGuard,
+    visitanteGuard
+} from './guards/autenticacion-guard';
+import {Filtercomponent} from "./components/filtercomponent/filtercomponent";
+import {Confirmarreservacomponent} from "./components/confirmarreservacomponent/confirmarreservacomponent";
+import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
+import {Misreservascomponent} from "./components/misreservascomponent/misreservascomponent";
 
 const routes: Routes = [
-    { path: '', component: Iniciocomponent },
-    { path: 'alojamiento/:id', component: Alojamientopagecomponent}
+    {
+        path: '',
+        redirectTo: 'inicio',
+        pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: Logincomponent,
+        canActivate: [visitanteGuard]
+    },
+    {
+        path: 'filter',
+        component: Filtercomponent
+    },
+    {
+        path: 'confirmar-reserva',
+        component: Confirmarreservacomponent
+    },
+    {
+        path: 'mis-reservas',
+        component: Misreservascomponent
+    },
+    {
+        path: '',
+        canActivateChild: [autenticacionGuard],
+        children: [
+            {
+                path: 'inicio',
+                component: Iniciocomponent
+            },
+            {
+                path: 'alojamiento/:id',
+                component: Alojamientopagecomponent
+            },
+            {
+                path: 'reservas',
+                component: Reservacomponent
+            },
+            {
+                path: 'alojamientos',
+                redirectTo: 'reservas',
+                pathMatch: 'full'
+            },
+        ]
+    },
+    {
+        path: '**',
+        redirectTo: 'inicio'
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
