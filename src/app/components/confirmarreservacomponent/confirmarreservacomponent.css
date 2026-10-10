@@ -1,0 +1,184 @@
+:host {
+    display: block;
+    min-height: 80vh;
+    padding: 48px 20px 72px;
+    background: #f7f6f2;
+}
+
+.reserva-formulario,
+.reserva-formulario * {
+    box-sizing: border-box;
+}
+
+.reserva-formulario.container.mx-5 {
+    width: 100%;
+    max-width: 960px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding: 0 32px 28px;
+    overflow: hidden;
+    border: 1px solid #e6ddc7;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+}
+
+.reserva-cabecera {
+    padding: 32px;
+    margin: 0 -32px 28px;
+    background: radial-gradient(
+            circle at top right,
+            rgba(212, 175, 55, 0.15),
+            transparent 55%
+    ),
+    linear-gradient(145deg, #101010, #28241c);
+}
+
+.reserva-etiqueta {
+    display: block;
+    margin-bottom: 12px;
+    color: #e4c66c;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.reserva-cabecera h1 {
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 750;
+}
+
+.reserva-cabecera p {
+    margin: 0;
+    color: #d2cec4;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.reserva-formulario > .row {
+    align-items: center;
+    padding: 10px 0;
+}
+
+.reserva-formulario label {
+    display: block;
+    margin: 0;
+    color: #565045;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+.reserva-formulario .form-control {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 15px;
+    border: 1px solid #e2ddd2;
+    border-radius: 11px;
+    background: #fcfbf8;
+    color: #171717;
+    font: inherit;
+    font-size: 0.92rem;
+    color-scheme: light;
+    transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.reserva-formulario .form-control:focus {
+    border-color: #a67c1c;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    outline: none;
+}
+
+.reserva-formulario .form-control::placeholder {
+    color: #99948a;
+}
+
+.reserva-formulario .form-control:disabled,
+.reserva-formulario .form-control[readonly] {
+    background: #f1eee7;
+    color: #686154;
+}
+
+.reserva-formulario input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+.reserva-formulario > .row.my-3 {
+    padding-top: 24px;
+    margin-top: 22px !important;
+    margin-bottom: 0 !important;
+    border-top: 1px solid #eee8db;
+}
+
+.reserva-formulario > .row.my-3 > .col-1 {
+    width: 100%;
+}
+
+.reserva-formulario .btn-explorar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 22px;
+    border: 1px solid #d4af37;
+    border-radius: 11px;
+    background: #171717;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 650;
+    transition: background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.reserva-formulario .btn-explorar:hover:not(:disabled) {
+    background: #d4af37;
+    color: #171717;
+}
+
+.reserva-formulario .btn-explorar:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.reserva-formulario .btn-explorar:focus-visible {
+    outline: 3px solid #a67c1c;
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    :host {
+        padding: 28px 12px 48px;
+    }
+
+    .reserva-formulario.container.mx-5 {
+        padding: 0 22px 22px;
+    }
+
+    .reserva-cabecera {
+        padding: 26px 22px;
+        margin-right: -22px;
+        margin-left: -22px;
+    }
+
+    .reserva-formulario > .row > .col-2,
+    .reserva-formulario > .row > .col-10 {
+        width: 100%;
+    }
+
+    .reserva-formulario label {
+        margin-bottom: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reserva-formulario .form-control,
+    .reserva-formulario .btn-explorar {
+        transition: none;
+    }
+}

@@ -1,17 +1,131 @@
-@if(alojamientoExiste) {
-    @if(alojamiento) {
-        <div class="section">
-            <h1>{{alojamiento.nombre}}</h1>
-            <p>{{alojamiento.precioNoche}}</p>
-            <h2>{{alojamiento.ciudad}}</h2>
-            <h2>{{alojamiento.departamento}}</h2>
+<section class="detalle-pagina">
+    <div class="container">
 
-            <app-cotizacioncomponent [alojamiento]="alojamiento"></app-cotizacioncomponent>
-        </div>
-    } @else {
-        <p>cargando...</p>
-    }
-}
-@else {
-    <p>No existe =(</p>
-}
+        @if (alojamientoExiste) {
+            @if (alojamiento) {
+
+                <a routerLink="/reservas" class="detalle-volver">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    Explorar alojamientos
+                </a>
+
+                <div class="row g-4 align-items-start">
+
+                    <div class="col-12 col-lg-7">
+                        <article class="detalle-alojamiento">
+
+                            <div class="detalle-imagen">
+                                <img
+                                        [src]="alojamiento.imagenPrincipal"
+                                        [alt]="alojamiento.nombre">
+
+                                <span class="detalle-tipo">
+                  {{ alojamiento.tipo }}
+                </span>
+                            </div>
+
+                            <div class="detalle-contenido">
+                                <div class="detalle-ubicacion">
+                  <span>
+                    <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true">
+                    </i>
+                      {{ alojamiento.ciudad }},
+                      {{ alojamiento.departamento }}
+                  </span>
+
+                                    <span class="detalle-calificacion">
+                    <i class="fa-solid fa-star" aria-hidden="true"></i>
+                                        {{ alojamiento.calificacion | number:'1.1-1' }}
+                  </span>
+                                </div>
+
+                                <h1>{{ alojamiento.nombre }}</h1>
+
+                                <p class="detalle-direccion">
+                                    {{ alojamiento.ubicacion }}
+                                </p>
+
+                                <div class="detalle-caracteristicas">
+                  <span>
+                    <i class="fa-solid fa-users" aria-hidden="true"></i>
+                      {{ alojamiento.capacidad }} huéspedes
+                  </span>
+
+                                    <span>
+                    <i class="fa-solid fa-door-open" aria-hidden="true"></i>
+                                        {{ alojamiento.habitaciones }} habitaciones
+                  </span>
+
+                                    <span>
+                    <i class="fa-solid fa-bed" aria-hidden="true"></i>
+                                        {{ alojamiento.camas }} camas
+                  </span>
+
+                                    <span>
+                    <i class="fa-solid fa-bath" aria-hidden="true"></i>
+                                        {{ alojamiento.banos }} baños
+                  </span>
+                                </div>
+
+                                <h2>Un espacio para tu próxima estancia</h2>
+
+                                <p class="detalle-descripcion">
+                                    {{ alojamiento.descripcion }}
+                                </p>
+
+                                <h2>Comodidades disponibles</h2>
+
+                                <ul class="detalle-servicios">
+                                    @for (servicio of alojamiento.servicios; track $index) {
+                                        <li>
+                                            <i
+                                                    class="fa-solid fa-check"
+                                                    aria-hidden="true">
+                                            </i>
+                                            {{ servicio }}
+                                        </li>
+                                    }
+                                </ul>
+
+                                <h2>Antes de tu llegada</h2>
+
+                                <ul class="detalle-reglas">
+                                    @for (regla of alojamiento.reglas; track $index) {
+                                        <li>{{ regla }}</li>
+                                    }
+                                </ul>
+                            </div>
+
+                        </article>
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <div class="detalle-cotizacion">
+                            <app-cotizacioncomponent
+                                    [alojamiento]="alojamiento">
+                            </app-cotizacioncomponent>
+                        </div>
+                    </div>
+
+                </div>
+
+            } @else {
+                <div class="detalle-estado" role="status">
+                    Cargando información del alojamiento…
+                </div>
+            }
+        } @else {
+            <div class="detalle-estado">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                <h1>Alojamiento no encontrado</h1>
+                <p>Explora otros espacios para tu próxima estancia.</p>
+                <a routerLink="/reservas" class="detalle-volver">
+                    Ver alojamientos
+                </a>
+            </div>
+        }
+
+    </div>
+</section>
