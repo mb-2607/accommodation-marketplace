@@ -1,0 +1,19 @@
+@if(alojamiento && reserva){
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button"
+                    data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+reserva.id"
+                    aria-expanded="false" [attr.aria-controls]="'collapse'+reserva.id">
+                {{ alojamiento.nombre }}
+            </button>
+        </h2>
+        <div [id]="'collapse'+reserva.id" class="accordion-collapse collapse show"
+             data-bs-parent="#accordionReservas">
+            <div class="accordion-body">
+                Esto es lo que tocaría editar Van Grieken
+            </div>
+        </div>
+    </div>
+} @else{
+    <p>No se encontraron reservas a su nombre</p>
+}
