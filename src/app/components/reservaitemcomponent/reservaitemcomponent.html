@@ -10,7 +10,67 @@
         <div [id]="'collapse'+reserva.id" class="accordion-collapse collapse show"
              data-bs-parent="#accordionReservas">
             <div class="accordion-body">
-                Esto es lo que tocaría editar Van Grieken
+                <h5>Información de la reserva </h5>
+                <p>
+                    <strong>Número de reserva: </strong>
+                    {{reserva.id}}
+                </p>
+
+                <p>
+                    <strong>Nombre del huésped:</strong>
+                    {{reserva.userName}}
+                </p>
+
+                <p>
+                    <strong>Correo:</strong>
+                    {{reserva.email}}
+                </p>
+                <hr>
+                <h5>Detalles de la estancia</h5>
+                <p>
+                    <strong>Departamento:</strong>
+                    {{ alojamiento.departamento }}
+                </p>
+
+                <p>
+                    <strong>Ciudad:</strong>
+                    {{ alojamiento.ciudad }}
+                </p>
+                <p>
+                    <strong>Alojamiento:</strong>
+                    {{ alojamiento.nombre }}
+                </p>
+
+                <p>
+                    <strong>Fecha de llegada:</strong>
+                    {{ reserva.fechaLlegada  }}
+                </p>
+
+                <p>
+                    <strong>Fecha de salida:</strong>
+                    {{ reserva.fechaSalida  }}
+                </p>
+
+                <p>
+                    <strong>Número de huéspedes:</strong>
+                    {{ reserva.numeroHuespedes }}
+                </p>
+
+                <p>
+                    <strong>Número de noches:</strong>
+                    {{ reserva.numeroNoches }}
+                </p>
+
+                <hr>
+
+                <p>
+                    <strong>Precio total:</strong>
+                    ${{ reserva.precioTotal | number:'1.0-0' }}
+                </p>
+                <p>
+                    <strong>Estado: </strong>
+                    <span>{{ reserva.estado }}</span>
+                </p>
             </div>
         </div>
     </div>
