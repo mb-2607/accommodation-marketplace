@@ -18,6 +18,7 @@ import { Misreservascomponent } from "./components/misreservascomponent/misreser
 import { Reservaitemcomponent } from "./components/reservaitemcomponent/reservaitemcomponent";
 import { Terminocomponent } from "./components/terminocomponent/terminocomponent";
 import { Perfilcomponent } from "./components/perfilcomponent/perfilcomponent";
+import { Privacidadcomponent } from "./components/privacidadcomponent/privacidadcomponent";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { Perfilcomponent } from "./components/perfilcomponent/perfilcomponent";
     Terminocomponent,
     Reservaitemcomponent,
     Perfilcomponent,
+    Privacidadcomponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
