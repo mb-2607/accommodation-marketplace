@@ -10,6 +10,7 @@ import {Reservacomponent} from "./components/reservacomponent/reservacomponent";
 import {Misreservascomponent} from "./components/misreservascomponent/misreservascomponent";
 import {Soportecomponent} from "./components/soportecomponent/soportecomponent";
 import {Perfilcomponent} from "./components/perfilcomponent/perfilcomponent";
+import {Privacidadcomponent} from "./components/privacidadcomponent/privacidadcomponent";
 
 const routes: Routes = [
     {
@@ -62,6 +63,10 @@ const routes: Routes = [
             {
                 path: 'perfil',
                 component: Perfilcomponent
+            },
+            {
+                path: 'privacidad',
+                component: Privacidadcomponent
             },
 
         ]

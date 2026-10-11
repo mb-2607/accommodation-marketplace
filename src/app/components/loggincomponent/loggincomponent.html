@@ -253,6 +253,18 @@
                         </p>
                     </ng-container>
 
+                    @if (!modoRegistro) {
+                        <div class="login-recuperacion">
+                            <button
+                                    type="button"
+                                    class="login-enlace"
+                                    (click)="recuperarContrasena()"
+                                    [disabled]="cargando">
+                                ¿Olvidaste tu contraseña?
+                            </button>
+                        </div>
+                    }
+
                     <button
                             type="submit"
                             class="login-boton"

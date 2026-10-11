@@ -284,4 +284,18 @@ export class AutenticacionService {
             !!perfil.documento &&
             !!perfil.fechaNacimiento;
     }
+
+    recuperarContrasena(correo: string) {
+        return this.cliente.post(
+            this.URL_BASE + 'accounts:sendOobCode',
+            {
+                requestType: 'PASSWORD_RESET',
+                email: correo.trim()
+            },
+            {
+                params: {key: this.API_KEY},
+                observe: 'response'
+            }
+        );
+    }
 }

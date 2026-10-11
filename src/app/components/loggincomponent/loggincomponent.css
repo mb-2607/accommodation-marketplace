@@ -499,3 +499,20 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+.login-recuperacion {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.login-recuperacion .login-enlace {
+    color: #92701b;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.login-recuperacion .login-enlace:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
