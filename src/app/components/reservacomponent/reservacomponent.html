@@ -1,0 +1,327 @@
+<section class="reservas-pagina">
+    <div class="container">
+
+        <header class="reservas-cabecera">
+            <div>
+        <span class="reservas-etiqueta">
+          ENCUENTRA TU LUGAR IDEAL
+        </span>
+
+                <h1>
+                    {{
+                        departamentoSeleccionado
+                            ? 'Alojamientos en ' + departamentoSeleccionado
+                            : 'Explora nuestros alojamientos'
+                    }}
+                </h1>
+
+                <p>
+                    Descubre espacios para descansar, compartir
+                    y disfrutar tu próxima estancia en Colombia.
+                </p>
+            </div>
+
+            <a routerLink="/inicio" class="volver-mapa">
+                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                Volver al mapa
+            </a>
+        </header>
+
+        <form
+                class="reservas-filtros"
+                aria-label="Filtrar alojamientos"
+                (ngSubmit)="aplicarFiltros()">
+
+            <div class="campo-filtro">
+                <label for="departamento">Departamento</label>
+
+                <select
+                        id="departamento"
+                        name="departamento"
+                        [(ngModel)]="departamentoSeleccionado"
+                        (ngModelChange)="cambiarDepartamento()">
+
+                    <option value="">Todos los departamentos</option>
+
+                    <option
+                            *ngFor="let departamento of departamentos"
+                            [value]="departamento">
+                        {{ departamento }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="campo-filtro">
+                <label for="ciudad">Ciudad</label>
+
+                <select
+                        id="ciudad"
+                        name="ciudad"
+                        [(ngModel)]="ciudadSeleccionada"
+                        (ngModelChange)="aplicarFiltros()">
+
+                    <option value="">Todas las ciudades</option>
+
+                    <option
+                            *ngFor="let ciudad of ciudades"
+                            [value]="ciudad">
+                        {{ ciudad }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="campo-filtro">
+                <label for="huespedes">Número de huéspedes</label>
+
+                <input
+                        id="huespedes"
+                        name="huespedes"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Cualquier capacidad"
+                        [(ngModel)]="huespedes"
+                        (ngModelChange)="aplicarFiltros()">
+            </div>
+
+            <div class="campo-filtro">
+                <label for="tipo">Tipo de alojamiento</label>
+
+                <select
+                        id="tipo"
+                        name="tipo"
+                        [(ngModel)]="tipoSeleccionado"
+                        (ngModelChange)="aplicarFiltros()">
+
+                    <option value="">Todos los tipos</option>
+
+                    <option
+                            *ngFor="let tipo of tipos"
+                            [value]="tipo">
+                        {{ tipo }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="campo-filtro">
+                <label for="precio">Precio máximo por noche</label>
+
+                <input
+                        id="precio"
+                        name="precioMaximo"
+                        type="number"
+                        min="0"
+                        step="10000"
+                        placeholder="Sin límite"
+                        [(ngModel)]="precioMaximo"
+                        (ngModelChange)="aplicarFiltros()">
+            </div>
+
+            <button
+                    type="button"
+                    class="boton-limpiar"
+                    (click)="limpiarFiltros()">
+                <i class="fa-solid fa-filter-circle-xmark" aria-hidden="true"></i>
+                Limpiar filtros
+            </button>
+
+        </form>
+
+        <p *ngIf="cargando" class="mensaje-estado" role="status">
+            Cargando alojamientos…
+        </p>
+
+        <p
+                *ngIf="error"
+                class="mensaje-estado mensaje-error"
+                role="alert">
+            {{ error }}
+        </p>
+
+        <ng-container *ngIf="!cargando && !error">
+
+            <div class="barra-resultados">
+                <p role="status">
+                    <strong>{{ tarjetas.length }}</strong>
+                    {{
+                        tarjetas.length === 1
+                            ? 'alojamiento disponible'
+                            : 'alojamientos disponibles'
+                    }}
+                </p>
+
+                <div class="campo-orden">
+                    <label for="orden">Ordenar por</label>
+
+                    <select
+                            id="orden"
+                            [(ngModel)]="ordenSeleccionado"
+                            (ngModelChange)="aplicarFiltros()">
+                        <option value="calificacion">Mejor calificación</option>
+                        <option value="precio-menor">Menor precio</option>
+                        <option value="precio-mayor">Mayor precio</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="tarjetas.length === 0" class="sin-resultados">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+
+                <h2>No encontramos alojamientos</h2>
+
+                <p>
+                    Cambia los filtros o explora otros departamentos.
+                </p>
+
+                <button
+                        type="button"
+                        class="boton-limpiar"
+                        (click)="limpiarFiltros()">
+                    Mostrar todos
+                </button>
+            </div>
+
+            <div class="reservas-grid">
+
+                <article
+                        *ngFor="let tarjeta of tarjetas; trackBy: trackPorId"
+                        class="reserva-card">
+
+                    <div
+                            class="card-galeria"
+                            role="group"
+                            [attr.aria-label]="'Fotos de ' + tarjeta.alojamiento.nombre">
+
+                        <img
+                                [src]="tarjeta.imagenes[tarjeta.indiceImagen]"
+                                [alt]="tarjeta.alojamiento.nombre + ', foto ' + (tarjeta.indiceImagen + 1)"
+                                loading="lazy"
+                                decoding="async"
+                                (error)="imagenFallida($event)">
+
+                        <span class="card-tipo">
+              {{ tarjeta.alojamiento.tipo }}
+            </span>
+
+                        <span class="contador-imagenes">
+              <i class="fa-regular fa-images" aria-hidden="true"></i>
+                            {{ tarjeta.indiceImagen + 1 }} /
+                            {{ tarjeta.imagenes.length }}
+            </span>
+
+                        <ng-container *ngIf="tarjeta.imagenes.length > 1">
+
+                            <button
+                                    type="button"
+                                    class="flecha flecha-anterior"
+                                    [attr.aria-label]="'Foto anterior de ' + tarjeta.alojamiento.nombre"
+                                    (click)="anteriorImagen(tarjeta)">
+                                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                            </button>
+
+                            <button
+                                    type="button"
+                                    class="flecha flecha-siguiente"
+                                    [attr.aria-label]="'Foto siguiente de ' + tarjeta.alojamiento.nombre"
+                                    (click)="siguienteImagen(tarjeta)">
+                                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+
+                            <div class="indicadores-imagenes">
+                                <button
+                                        *ngFor="let imagen of tarjeta.imagenes; let i = index"
+                                        type="button"
+                                        [class.activo]="tarjeta.indiceImagen === i"
+                                        [attr.aria-label]="'Mostrar foto ' + (i + 1)"
+                                        [attr.aria-pressed]="tarjeta.indiceImagen === i"
+                                        (click)="seleccionarImagen(tarjeta, i)">
+                                </button>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                    <div class="card-contenido">
+
+                        <div class="card-ubicacion">
+              <span>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                  {{ tarjeta.alojamiento.ciudad }}
+              </span>
+
+                            <span
+                                    class="card-calificacion"
+                                    [attr.aria-label]="'Calificación ' + tarjeta.alojamiento.calificacion + ' de 5'">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                                {{ tarjeta.alojamiento.calificacion | number:'1.1-1' }}
+              </span>
+                        </div>
+
+                        <h2>
+                            <a [routerLink]="['/alojamiento', tarjeta.alojamiento.id]">
+                                {{ tarjeta.alojamiento.nombre }}
+                            </a>
+                        </h2>
+
+                        <p class="card-departamento">
+                            {{ tarjeta.alojamiento.departamento }}
+                        </p>
+
+                        <p class="card-descripcion">
+                            {{ tarjeta.alojamiento.descripcion }}
+                        </p>
+
+                        <div class="card-caracteristicas">
+              <span>
+                <i class="fa-solid fa-users" aria-hidden="true"></i>
+                  {{ tarjeta.alojamiento.capacidad }} huéspedes
+              </span>
+
+                            <span>
+                <i class="fa-solid fa-bed" aria-hidden="true"></i>
+                                {{ tarjeta.alojamiento.camas }} camas
+              </span>
+
+                            <span>
+                <i class="fa-solid fa-bath" aria-hidden="true"></i>
+                                {{ tarjeta.alojamiento.banos }} baños
+              </span>
+                        </div>
+
+                        <ul class="card-servicios" aria-label="Servicios disponibles">
+                            <li *ngFor="let servicio of tarjeta.alojamiento.servicios">
+                                {{ servicio }}
+                            </li>
+                        </ul>
+
+                        <div class="card-pie">
+                            <div class="card-precio">
+                                <strong>
+                                    {{
+                                        tarjeta.alojamiento.precioNoche
+                                            | currency:'COP':'code':'1.0-0'
+                                    }}
+                                </strong>
+
+                                <span>por noche</span>
+                            </div>
+
+                            <a
+                                    class="boton-detalle"
+                                    [routerLink]="['/alojamiento', tarjeta.alojamiento.id]">
+                                Ver detalle
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </ng-container>
+
+    </div>
+</section>

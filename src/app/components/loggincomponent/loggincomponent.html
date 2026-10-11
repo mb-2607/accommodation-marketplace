@@ -1,3 +1,9 @@
+@if (modoRegistro) {
+    <app-terminocomponent
+            (aceptacion)="terminosAceptados = $event">
+    </app-terminocomponent>
+}
+
 <header class="login-cabecera">
     <h1 class="login-titulo">
         Regístrate y encuentra tu lugar ideal
@@ -251,18 +257,17 @@
                             type="submit"
                             class="login-boton"
                             [disabled]="
-            cargando ||
-            formulario.invalid ||
-            (modoRegistro && (confirmacion !== contrasena || edad === null))
-        ">
+        cargando ||
+        formulario.invalid ||
+        (modoRegistro && !terminosAceptados)
+    ">
                         {{
                             cargando
                                 ? 'Procesando…'
                                 : modoRegistro
-                                    ? 'Crear mi cuenta'
+                                    ? 'Completar registro'
                                     : 'Ingresar'
                         }}
-
                         <span aria-hidden="true">→</span>
                     </button>
 
@@ -273,6 +278,21 @@
                         Estamos verificando tus datos.
                     </p>
                 </form>
+
+                @if (!modoRegistro) {
+                    <div class="login-separador">
+                        <span>o continúa con</span>
+                    </div>
+
+                    <button
+                            type="button"
+                            class="login-google"
+                            (click)="continuarConGoogle()"
+                            [disabled]="cargando">
+                        <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        Continuar con Google
+                    </button>
+                }
 
                 <p class="login-registro">
                     {{

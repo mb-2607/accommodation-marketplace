@@ -8,6 +8,15 @@ import {
     tap,
     timeout
 } from 'rxjs';
+import {getApps, initializeApp} from 'firebase/app';
+import {
+    browserSessionPersistence,
+    getAuth,
+    GoogleAuthProvider,
+    setPersistence,
+    signInWithPopup,
+    signOut
+} from 'firebase/auth';
 import {CorreoService} from './correo-service';
 
 export interface RespuestaAutenticacion {
@@ -24,6 +33,16 @@ export interface SesionUsuario {
     email: string;
     token: string;
     expiraEn: number;
+}
+
+export interface PerfilUsuario {
+    nombre: string;
+    documento: string;
+    fechaNacimiento: string;
+    fotoGoogle: string;
+    fotoPersonalizada: string;
+    registroCompleto?: boolean;
+    terminosAceptadosEn?: string;
 }
 
 @Injectable({
@@ -114,7 +133,6 @@ export class AutenticacionService {
         datos: RespuestaAutenticacion
     ): void {
         if (typeof window === 'undefined') return;
-
         const sesion: SesionUsuario = {
             uid: datos.localId,
             email: datos.email,
@@ -131,16 +149,13 @@ export class AutenticacionService {
 
     obtenerSesion(): SesionUsuario | null {
         if (typeof window === 'undefined') return null;
-
         const datos = sessionStorage.getItem(
             this.CLAVE_SESION
         );
 
         if (!datos) return null;
-
         try {
             const sesion = JSON.parse(datos) as SesionUsuario;
-
             if (
                 !sesion.token ||
                 !Number.isFinite(sesion.expiraEn) ||
@@ -159,7 +174,114 @@ export class AutenticacionService {
 
     cerrarSesion(): void {
         if (typeof window === 'undefined') return;
-
         sessionStorage.removeItem(this.CLAVE_SESION);
+        const app = getApps().find(
+            aplicacion => aplicacion.name === 'reservas-lr-google'
+        );
+
+        if (app) {
+            void signOut(getAuth(app)).catch(() => {
+                console.warn('No se pudo cerrar la sesión del SDK de Firebase.');
+            });
+        }
+    }
+
+    private obtenerAuthGoogle() {
+        const nombreApp = 'reservas-lr-google';
+        const app =
+            getApps().find(aplicacion => aplicacion.name === nombreApp) ??
+            initializeApp(
+                {
+                    apiKey: this.API_KEY,
+                    authDomain: 'app-marketplace-bfd41.firebaseapp.com',
+                    projectId: 'app-marketplace-bfd41'
+                },
+                nombreApp
+            );
+
+        return getAuth(app);
+    }
+
+    async iniciarSesionGoogle(): Promise<void> {
+        const auth = this.obtenerAuthGoogle();
+        await setPersistence(auth, browserSessionPersistence);
+        const proveedor = new GoogleAuthProvider();
+        proveedor.setCustomParameters({
+            prompt: 'select_account'
+        });
+
+        const resultado = await signInWithPopup(auth, proveedor);
+        const usuario = resultado.user;
+        const informacionToken = await usuario.getIdTokenResult();
+        this.guardarSesion({
+            localId: usuario.uid,
+            email: usuario.email ?? '',
+            idToken: informacionToken.token,
+            refreshToken: usuario.refreshToken,
+            expiresIn: String(
+                Math.max(
+                    0,
+                    (Date.parse(informacionToken.expirationTime) - Date.now()) / 1000
+                )
+            )
+        });
+
+        const perfil = this.obtenerPerfil();
+        this.guardarPerfil({
+            ...perfil,
+            nombre: perfil.nombre || usuario.displayName || '',
+            fotoGoogle: usuario.photoURL || perfil.fotoGoogle
+        });
+    }
+
+    obtenerPerfil(): PerfilUsuario {
+        const vacio: PerfilUsuario = {
+            nombre: '',
+            documento: '',
+            fechaNacimiento: '',
+            fotoGoogle: '',
+            fotoPersonalizada: ''
+        };
+
+        const sesion = this.obtenerSesion();
+        if (!sesion || typeof window === 'undefined') {
+            return vacio;
+        }
+
+        try {
+            const datos = localStorage.getItem(
+                `reservas-lr-perfil-${sesion.uid}`
+            );
+
+            return datos
+                ? {...vacio, ...JSON.parse(datos)}
+                : vacio;
+        } catch {
+            return vacio;
+        }
+    }
+
+    guardarPerfil(perfil: PerfilUsuario): void {
+        const sesion = this.obtenerSesion();
+        if (!sesion || typeof window === 'undefined') {
+            throw new Error('Debes iniciar sesión para guardar tu perfil.');
+        }
+
+        localStorage.setItem(
+            `reservas-lr-perfil-${sesion.uid}`,
+            JSON.stringify(perfil)
+        );
+    }
+
+    tieneRegistroCompleto(): boolean {
+        if (!this.obtenerSesion()) return false;
+
+        const perfil = this.obtenerPerfil();
+
+        return perfil.registroCompleto === true &&
+            !!perfil.terminosAceptadosEn &&
+            !!perfil.nombre.trim() &&
+            !!perfil.documento &&
+            !!perfil.fechaNacimiento;
     }
 }

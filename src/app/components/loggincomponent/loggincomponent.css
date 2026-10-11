@@ -456,3 +456,46 @@
 .login-formulario input[type="date"] {
     color-scheme: light;
 }
+
+.login-separador {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 24px 0;
+    color: #777;
+    font-size: 0.82rem;
+}
+
+.login-separador::before,
+.login-separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e8e2d6;
+}
+
+.login-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 18px;
+    border: 1px solid #ded8cb;
+    border-radius: 10px;
+    background: #fff;
+    color: #171717;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-google:hover:not(:disabled) {
+    border-color: #a67c1c;
+    background: #fcfaf4;
+}
+
+.login-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
