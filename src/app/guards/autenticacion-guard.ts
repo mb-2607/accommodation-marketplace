@@ -6,7 +6,7 @@ export const autenticacionGuard: CanActivateFn = () => {
     const autenticacion = inject(AutenticacionService);
     const router = inject(Router);
 
-    return autenticacion.obtenerSesion()
+    return autenticacion.tieneRegistroCompleto()
         ? true
         : router.createUrlTree(['/login']);
 };
@@ -15,7 +15,7 @@ export const visitanteGuard: CanActivateFn = () => {
     const autenticacion = inject(AutenticacionService);
     const router = inject(Router);
 
-    return autenticacion.obtenerSesion()
+    return autenticacion.tieneRegistroCompleto()
         ? router.createUrlTree(['/inicio'])
         : true;
 };

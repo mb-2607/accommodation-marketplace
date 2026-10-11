@@ -41,13 +41,15 @@
                 </label>
 
                 <input
-                        type="date"
-                        id="fechaInicio"
-                        class="form-control campo-fecha"
-                        [(ngModel)]="fechaInicio"
-                        [min]="fechaHoy"
-                        (ngModelChange)="cotizacionValida = false"
-                        required>
+                    #calendarioLlegada
+                    type="date"
+                    id="fechaInicio"
+                    class="form-control campo-fecha"
+                    [(ngModel)]="fechaInicio"
+                    [min]="fechaHoy"
+                    (click)="calendarioLlegada.showPicker()"
+                    (ngModelChange)="cotizacionValida = false"
+                    required>
             </div>
 
             <div class="col-12 col-md-6">
@@ -56,13 +58,15 @@
                 </label>
 
                 <input
-                        type="date"
-                        id="fechaFin"
-                        class="form-control campo-fecha"
-                        [(ngModel)]="fechaFin"
-                        [min]="fechaMinimaSalida"
-                        (ngModelChange)="cotizacionValida = false"
-                        required>
+                    #calendarioSalida
+                    type="date"
+                    id="fechaFin"
+                    class="form-control campo-fecha"
+                    [(ngModel)]="fechaFin"
+                    [min]="fechaMinimaSalida"
+                    (click)="calendarioSalida.showPicker()"
+                    (ngModelChange)="cotizacionValida = false"
+                    required>
             </div>
         </div>
 

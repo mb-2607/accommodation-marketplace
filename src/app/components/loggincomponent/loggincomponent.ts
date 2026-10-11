@@ -8,7 +8,7 @@ import {
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {AutenticacionService} from '../../../../../accommodation-marketplace/src/app/services/autenticacion-service';
+import {AutenticacionService} from '../../services/autenticacion-service';
 
 @Component({
     selector: 'app-loggincomponent',
@@ -27,13 +27,14 @@ export class Logincomponent {
     nombreCompleto = '';
     documento = '';
     fechaNacimiento = '';
+    terminosAceptados = false;
+    registroPendiente = false;
 
     readonly patronNombre = '[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+';
     private autenticacionService = inject(AutenticacionService);
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
     private destroyRef = inject(DestroyRef);
-
     readonly fechaMaximaNacimiento = (() => {
         const hoy = new Date();
         const anio = hoy.getFullYear();
@@ -95,7 +96,7 @@ export class Logincomponent {
             !new RegExp(`^${this.patronNombre}$`).test(this.nombreCompleto)
         ) {
             this.mensaje =
-                'El nombre debe tener entre 3 y 100 caracteres y contener solo letras y espacios.';
+                'El nombre debe tener entre 6 y 100 caracteres y contener solo letras y espacios.';
             return false;
         }
 
@@ -123,18 +124,96 @@ export class Logincomponent {
 
     cambiarModo(): void {
         if (this.cargando) return;
-
         this.modoRegistro = !this.modoRegistro;
+        this.terminosAceptados = false;
         this.mensaje = '';
         this.contrasena = '';
         this.confirmacion = '';
         this.mostrarContrasena = false;
+
+        if (!this.modoRegistro && this.registroPendiente) {
+            this.autenticacionService.cerrarSesion();
+            this.registroPendiente = false;
+        }
+    }
+
+    private abrirRegistroPendiente(): void {
+        const sesion = this.autenticacionService.obtenerSesion();
+        const perfil = this.autenticacionService.obtenerPerfil();
+
+        this.correo = sesion?.email || this.correo;
+        this.nombreCompleto = perfil.nombre;
+        this.documento = perfil.documento;
+        this.fechaNacimiento = perfil.fechaNacimiento;
+
+        this.registroPendiente = true;
+        this.modoRegistro = true;
+        this.terminosAceptados = false;
+        this.contrasena = '';
+        this.confirmacion = '';
+
+        this.mensaje =
+            'Completa tu registro y acepta los términos para acceder a Reservas LR.';
+
+        this.cdr.markForCheck();
+    }
+
+    private completarRegistro(): boolean {
+        try {
+            const perfil = this.autenticacionService.obtenerPerfil();
+            this.autenticacionService.guardarPerfil({
+                ...perfil,
+                nombre: this.nombreCompleto.trim(),
+                documento: this.documento,
+                fechaNacimiento: this.fechaNacimiento,
+                registroCompleto: true,
+                terminosAceptadosEn: new Date().toISOString()
+            });
+
+            return true;
+        } catch {
+            this.mensaje =
+                'No se pudo guardar el registro en este navegador. Inténtalo nuevamente.';
+
+            return false;
+        }
     }
 
     iniciarSesion(): void {
         if (this.cargando) return;
         this.mensaje = '';
         const correo = this.correo.trim();
+        const esRegistro = this.modoRegistro;
+
+        if (esRegistro) {
+            if (!this.terminosAceptados) {
+                this.mensaje =
+                    'Debes aceptar los términos y condiciones.';
+                return;
+            }
+
+            if (!this.validarDatosRegistro()) {
+                return;
+            }
+        }
+
+        if (this.registroPendiente) {
+            if (!esRegistro) return;
+            if (!this.autenticacionService.obtenerSesion()) {
+                this.registroPendiente = false;
+                this.mensaje =
+                    'La sesión venció. Vuelve a iniciar sesión para completar tu registro.';
+                return;
+            }
+
+            if (this.completarRegistro()) {
+                void this.router.navigate(['/inicio']);
+            }
+
+            this.cdr.markForCheck();
+            return;
+        }
+
         if (!correo || !this.contrasena) {
             this.mensaje = 'Por favor completa todos los campos.';
             return;
@@ -145,7 +224,7 @@ export class Logincomponent {
             return;
         }
 
-        if (this.modoRegistro) {
+        if (esRegistro) {
             if (this.contrasena.length < 6) {
                 this.mensaje =
                     'La contraseña debe tener al menos 6 caracteres.';
@@ -157,13 +236,10 @@ export class Logincomponent {
                 return;
             }
         }
-        if (this.modoRegistro && !this.validarDatosRegistro()) {
-            return;
-        }
 
         this.cargando = true;
 
-        const solicitud = this.modoRegistro
+        const solicitud = esRegistro
             ? this.autenticacionService.registrarUsuario(
                 correo,
                 this.contrasena
@@ -176,9 +252,11 @@ export class Logincomponent {
         solicitud.pipe(
             takeUntilDestroyed(this.destroyRef)
         ).subscribe({
-            next: (respuesta) => {
+            next: respuesta => {
                 this.cargando = false;
+
                 const datos = respuesta.body;
+
                 if (!datos) {
                     this.mensaje =
                         'No se recibió la información de la cuenta.';
@@ -188,26 +266,33 @@ export class Logincomponent {
 
                 this.contrasena = '';
                 this.confirmacion = '';
-                if (this.modoRegistro) {
-                    this.mensaje = datos.bienvenidaEnviada
-                        ? 'Tu cuenta fue creada. Enviamos el correo de bienvenida; revisa también la carpeta de spam.'
-                        : 'Tu cuenta fue creada, pero no pudimos enviar la bienvenida. Ya puedes iniciar sesión.';
 
-                    this.modoRegistro = false;
+                if (esRegistro) {
+                    if (!this.completarRegistro()) {
+                        this.registroPendiente = true;
+                        this.cdr.markForCheck();
+                        return;
+                    }
+
+                    this.mensaje = datos.bienvenidaEnviada
+                        ? 'Registro completado. Enviamos tu correo de bienvenida.'
+                        : 'Registro completado. No se pudo enviar el correo de bienvenida.';
+
                     this.cdr.markForCheck();
+                    void this.router.navigate(['/inicio']);
+                    return;
+                }
+
+                if (!this.autenticacionService.tieneRegistroCompleto()) {
+                    this.abrirRegistroPendiente();
                     return;
                 }
 
                 this.cdr.markForCheck();
-                this.router.navigate(['/inicio']);
+                void this.router.navigate(['/inicio']);
             },
 
             error: (error: HttpErrorResponse) => {
-                console.error('Estado HTTP:', error.status);
-                console.error(
-                    'Mensaje Firebase:',
-                    error.error?.error?.message
-                );
                 this.cargando = false;
                 this.mensaje = this.obtenerMensajeError(error);
                 this.cdr.markForCheck();
@@ -255,6 +340,31 @@ export class Logincomponent {
 
             default:
                 return 'No fue posible completar la solicitud. Inténtalo de nuevo.';
+        }
+    }
+
+    async continuarConGoogle(): Promise<void> {
+        if (this.cargando) return;
+        this.cargando = true;
+        this.mensaje = '';
+
+        try {
+            await this.autenticacionService.iniciarSesionGoogle();
+
+            if (!this.autenticacionService.tieneRegistroCompleto()) {
+                this.abrirRegistroPendiente();
+                return;
+            }
+
+            await this.router.navigate(['/inicio']);
+        } catch {
+            this.autenticacionService.cerrarSesion();
+
+            this.mensaje =
+                'No se pudo iniciar sesión con Google. Inténtalo nuevamente.';
+        } finally {
+            this.cargando = false;
+            this.cdr.markForCheck();
         }
     }
 }

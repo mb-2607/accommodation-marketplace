@@ -1,0 +1,251 @@
+:host {
+    display: block;
+}
+
+.perfil-pagina,
+.perfil-pagina * {
+    box-sizing: border-box;
+}
+
+.perfil-pagina {
+    min-height: 80vh;
+    padding: 56px 0 80px;
+    background: #f7f6f2;
+}
+
+.perfil-cabecera {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.perfil-cabecera > span,
+.perfil-etiqueta {
+    color: #92701b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.perfil-cabecera h1 {
+    margin: 12px 0;
+    color: #171717;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 750;
+}
+
+.perfil-cabecera p {
+    margin: 0;
+    color: #777;
+    line-height: 1.7;
+}
+
+.perfil-tarjeta {
+    max-width: 1040px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #e8e1d2;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.07);
+}
+
+.perfil-identidad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 26px;
+    background: linear-gradient(145deg, #111, #29251d);
+    text-align: center;
+    color: #fff;
+}
+
+.perfil-avatar {
+    display: grid;
+    place-items: center;
+    width: 132px;
+    height: 132px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 3px solid #d4af37;
+    border-radius: 50%;
+    background: #393329;
+    color: #e4c66c;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.perfil-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-identidad h2 {
+    margin: 0 0 10px;
+    font-size: 1.35rem;
+    overflow-wrap: anywhere;
+}
+
+.perfil-correo {
+    margin: 0 0 24px;
+    color: #d6d0c4;
+    font-size: 0.88rem;
+    overflow-wrap: anywhere;
+}
+
+.perfil-cambiar-foto {
+    padding: 11px 18px;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    background: transparent;
+    color: #e4c66c;
+    font: inherit;
+    cursor: pointer;
+}
+
+.perfil-cambiar-foto i {
+    margin-right: 8px;
+}
+
+.perfil-restaurar {
+    margin-top: 14px;
+    border: none;
+    background: transparent;
+    color: #e4c66c;
+    font: inherit;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.perfil-identidad small {
+    margin-top: 18px;
+    color: #b9b2a5;
+    font-size: 0.73rem;
+}
+
+.perfil-datos {
+    padding: 42px;
+}
+
+.perfil-datos h2 {
+    margin: 12px 0;
+    color: #171717;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.perfil-introduccion {
+    margin-bottom: 28px;
+    color: #777;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.perfil-datos label {
+    display: block;
+    margin-bottom: 8px;
+    color: #514b40;
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+.perfil-datos input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #e1dbce;
+    border-radius: 10px;
+    background: #fcfbf8;
+    color: #171717;
+    color-scheme: light;
+    font: inherit;
+    font-size: 0.92rem;
+}
+
+.perfil-datos input:focus {
+    outline: none;
+    border-color: #a67c1c;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.perfil-datos input[readonly] {
+    background: #f0eee8;
+    color: #777;
+}
+
+.perfil-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.perfil-guardar,
+.perfil-salir {
+    padding: 13px 20px;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.perfil-guardar {
+    border: 1px solid #d4af37;
+    background: #171717;
+    color: #e4c66c;
+}
+
+.perfil-guardar i {
+    margin-left: 10px;
+}
+
+.perfil-guardar:hover:not(:disabled) {
+    background: #d4af37;
+    color: #171717;
+}
+
+.perfil-guardar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.perfil-salir {
+    border: 1px solid #ddd6c7;
+    background: #fff;
+    color: #555;
+}
+
+.perfil-mensaje {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #eef6ef;
+    color: #32623c;
+    font-size: 0.88rem;
+}
+
+.perfil-error {
+    background: #fff0ee;
+    color: #9a3026;
+}
+
+button:focus-visible {
+    outline: 2px solid #a67c1c;
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    .perfil-pagina {
+        padding: 32px 0 48px;
+    }
+
+    .perfil-datos {
+        padding: 30px 22px;
+    }
+
+    .perfil-acciones button {
+        width: 100%;
+    }
+}

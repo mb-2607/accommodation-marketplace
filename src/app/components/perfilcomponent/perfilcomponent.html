@@ -1,0 +1,142 @@
+<section class="perfil-pagina">
+    <div class="container">
+        <header class="perfil-cabecera">
+            <span>RESERVAS LR</span>
+            <h1>Mi perfil</h1>
+            <p>Un espacio para ti y tus próximas experiencias.</p>
+        </header>
+
+        @if (sesion) {
+            <div class="perfil-tarjeta">
+                <div class="row g-0">
+                    <aside class="col-12 col-lg-4 perfil-identidad">
+                        <div class="perfil-avatar">
+                            @if (foto && !fotoFallida) {
+                                <img
+                                        [src]="foto"
+                                        alt="Foto de tu perfil"
+                                        referrerpolicy="no-referrer"
+                                        (error)="fotoFallida = true">
+                            } @else {
+                                <span>{{ iniciales }}</span>
+                            }
+                        </div>
+
+                        <h2>{{ perfil.nombre || 'Tu cuenta' }}</h2>
+                        <p class="perfil-correo">{{ sesion.email }}</p>
+
+                        <input
+                            #selectorFoto
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                            hidden
+                            (change)="cambiarFoto($event)">
+
+                        <button
+                                type="button"
+                                class="perfil-cambiar-foto"
+                                (click)="selectorFoto.click()">
+                            <i class="fa-solid fa-camera" aria-hidden="true"></i>
+                            Cambiar foto
+                        </button>
+
+                        @if (perfil.fotoPersonalizada) {
+                            <button
+                                    type="button"
+                                    class="perfil-restaurar"
+                                    (click)="restaurarFoto()">
+                                {{ perfil.fotoGoogle ? 'Usar foto de Google' : 'Usar iniciales' }}
+                            </button>
+                        }
+
+                        <small>JPG, PNG o WebP · Máximo 1 MB</small>
+                    </aside>
+
+                    <div class="col-12 col-lg-8 perfil-datos">
+                        <span class="perfil-etiqueta">TU INFORMACIÓN</span>
+                        <h2>Datos personales</h2>
+                        <p class="perfil-introduccion">
+                            Completa o actualiza la información de tu perfil.
+                        </p>
+
+                        @if (mensaje) {
+                            <p
+                                    class="perfil-mensaje"
+                                    [class.perfil-error]="esError"
+                                    role="status">
+                                {{ mensaje }}
+                            </p>
+                        }
+
+                        <form #formulario="ngForm" (ngSubmit)="guardar()">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="perfil-nombre">Nombre completo</label>
+                                    <input
+                                            id="perfil-nombre"
+                                            name="nombre"
+                                            type="text"
+                                            [(ngModel)]="perfil.nombre"
+                                            [pattern]="patronNombre"
+                                            minlength="2"
+                                            maxlength="100"
+                                            autocomplete="name"
+                                            required>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="perfil-email">Correo electrónico</label>
+                                    <input
+                                            id="perfil-email"
+                                            type="email"
+                                            [value]="sesion.email"
+                                            readonly>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label for="perfil-documento">Documento</label>
+                                    <input
+                                            id="perfil-documento"
+                                            name="documento"
+                                            type="text"
+                                            inputmode="numeric"
+                                            pattern="[0-9]{5,20}"
+                                            maxlength="20"
+                                            [(ngModel)]="perfil.documento"
+                                            placeholder="Número de documento">
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label for="perfil-nacimiento">Fecha de nacimiento</label>
+                                    <input
+                                            id="perfil-nacimiento"
+                                            name="fechaNacimiento"
+                                            type="date"
+                                            [max]="fechaMaxima"
+                                            [(ngModel)]="perfil.fechaNacimiento">
+                                </div>
+                            </div>
+
+                            <div class="perfil-acciones">
+                                <button
+                                        type="submit"
+                                        class="perfil-guardar"
+                                        [disabled]="formulario.invalid">
+                                    Guardar cambios
+                                    <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                </button>
+
+                                <button
+                                        type="button"
+                                        class="perfil-salir"
+                                        (click)="cerrarSesion()">
+                                    Cerrar sesión
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
