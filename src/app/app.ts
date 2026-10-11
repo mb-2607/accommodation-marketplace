@@ -20,7 +20,7 @@ export class App implements OnInit {
     private autenticacion = inject(AutenticacionService);
 
     get mostrarContenido(): boolean {
-        return this.autenticacion.obtenerSesion() !== null;
+        return this.autenticacion.tieneRegistroCompleto();
     }
 
     ngOnInit(): void {

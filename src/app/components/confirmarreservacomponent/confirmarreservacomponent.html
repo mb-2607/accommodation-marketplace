@@ -83,13 +83,17 @@
         <div class="col-2">
             <label for="reserva-llegada">Fecha llegada</label>
         </div>
+
         <div class="col-10">
-            <input
-                    id="reserva-llegada"
-                    type="date"
-                    class="form-control"
-                    formControlName="fechaLlegada"
-                    placeholder="">
+            <div class="reserva-campo-fecha">
+                <input
+                        id="reserva-llegada"
+                        type="date"
+                        class="form-control"
+                        formControlName="fechaLlegada">
+
+
+            </div>
         </div>
     </div>
 
@@ -97,13 +101,22 @@
         <div class="col-2">
             <label for="reserva-salida">Fecha salida</label>
         </div>
+
         <div class="col-10">
-            <input
-                    id="reserva-salida"
-                    type="date"
-                    class="form-control"
-                    formControlName="fechaSalida"
-                    placeholder="">
+            <div class="reserva-campo-fecha">
+                <input
+                        id="reserva-salida"
+                        type="date"
+                        class="form-control"
+                        formControlName="fechaSalida">
+
+            </div>
+
+            <a
+                    [routerLink]="['/alojamiento', form.controls.idAlojamiento.value]"
+                    class="reserva-cambiar-fechas">
+                Cambiar fechas y volver a cotizar
+            </a>
         </div>
     </div>
 

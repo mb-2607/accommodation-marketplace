@@ -182,3 +182,38 @@
         transition: none;
     }
 }
+
+.reserva-campo-fecha {
+    position: relative;
+}
+
+.reserva-campo-fecha .form-control {
+    padding-right: 48px;
+}
+
+.reserva-campo-fecha > i {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: #a67c1c;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.reserva-campo-fecha input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.reserva-cambiar-fechas {
+    display: inline-block;
+    margin-top: 10px;
+    color: #92701b;
+    font-size: 0.85rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.reserva-cambiar-fechas:hover {
+    text-decoration: underline;
+}
