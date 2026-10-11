@@ -367,4 +367,41 @@ export class Logincomponent {
             this.cdr.markForCheck();
         }
     }
+
+    recuperarContrasena(): void {
+        if (this.cargando) return;
+        const correo = this.correo.trim();
+        this.mensaje = '';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+            this.mensaje =
+                'Escribe tu correo electrónico para recuperar la contraseña.';
+            return;
+        }
+
+        this.cargando = true;
+
+        this.autenticacionService.recuperarContrasena(correo)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe({
+                next: () => {
+                    this.cargando = false;
+                    this.mensaje =
+                        'Si el correo corresponde a una cuenta, recibirás un enlace para restablecer tu contraseña. Revisa también spam.';
+                    this.cdr.markForCheck();
+                },
+                error: (error: HttpErrorResponse) => {
+                    this.cargando = false;
+
+                    const codigo = String(
+                        error.error?.error?.message ?? ''
+                    ).split(' : ')[0];
+
+                    this.mensaje = codigo === 'EMAIL_NOT_FOUND'
+                        ? 'Si el correo corresponde a una cuenta, recibirás un enlace para restablecer tu contraseña. Revisa también spam.'
+                        : this.obtenerMensajeError(error);
+
+                    this.cdr.markForCheck();
+                }
+            });
+    }
 }
