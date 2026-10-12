@@ -1,64 +1,201 @@
-
 .accordion-item {
     border: 1px solid #e3ce8a;
-    border-radius: 12px;
+    border-radius: 10px;
     margin-bottom: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.12);
+    background-color: white;
 }
 
 .accordion-button {
-    background-color: #fff8e5;
-    color: #80651f;
-    font-weight: bold;
-    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 22px;
+    background-color: #e3ce8a;
+    color: #29251c;
+    font-size: 16px;
+    font-weight: 600;
+        box-shadow: none;
 }
 
 .accordion-button:not(.collapsed) {
     background-color: #e3ce8a;
-    color: #49370d;
+    color: #29251c;
     box-shadow: none;
 }
 
-.accordion-button:focus {
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22);
+
+.accordion-button::after {
+    width: 13px;
+    height: 13px;
+    background-size: 13px;
 }
 
-.accordion-body {
+
+.icono-alojamiento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 7px;
     background-color: #fffdf8;
-    padding: 25px;
-    color: black;
+    color: #b58a24;
+    font-size: 16px;
 }
-
-.accordion-body h5 {
-    color: #80651f;
-    font-weight: bold;
-    margin-bottom: 16px;
-}
-
-.accordion-body p {
-    padding: 10px;
-    margin-bottom: 8px;
-    background-color: #fff8e5;
-    border-radius: 67px;
-}
-
 
 .accordion-body {
-    color: #80651f;
+    padding: 24px;
+    background-color: white;
+    color: #252525;
+}
+
+.seccion-reserva h5 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 14px;
+    color: #29251c;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.seccion-reserva h5 i,
+.etiqueta i {
+    color: #b58a24;
+}
+
+
+.rejilla-reserva {
+    display: grid;
+    grid-template-columns: 0.8fr 1.7fr 1.7fr;
+    gap: 12px;
+}
+
+.rejilla-estancia {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.dato-reserva {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    min-width: 0;
+    min-height: 63px;
+    padding: 13px 14px;
+    border-radius: 9px;
+    background-color: #faf6e9;
+    overflow-wrap: anywhere;
+}
+
+.dato-alojamiento {
+    grid-column: span 2;
+}
+
+.etiqueta {
+    color: #77736a;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.dato-reserva strong {
+    color: #29251c;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .accordion-body hr {
-    border-color: gray;
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee9df;
+    opacity: 1;
 }
 
-@media (max-width: 576px) {
+.resumen-reserva {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    border-top: 1px solid #eee9df;
+    background-color: #fffcf6;
+}
+
+.precio-reserva {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.precio-reserva strong {
+    color: #25231f;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.estado-reserva {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.etiqueta-estado {
+    padding: 6px 12px;
+    border: 1px solid #e3ce8a;
+    border-radius: 20px;
+    color: #a77b15;
+    background-color: #fffcf4;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .rejilla-reserva {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rejilla-estancia {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dato-alojamiento {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 480px) {
     .accordion-body {
-        padding: 15px;
+        padding: 16px;
     }
 
     .accordion-button {
-        padding: 15px;
-        font-size: 16px;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .rejilla-reserva,
+    .rejilla-estancia {
+        grid-template-columns: 1fr;
+    }
+
+    .dato-alojamiento {
+        grid-column: span 1;
+    }
+
+    .resumen-reserva {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+    .precio-reserva strong {
+        font-size: 23px;
+    }
+
+    .estado-reserva {
+        flex-wrap: wrap;
     }
 }
