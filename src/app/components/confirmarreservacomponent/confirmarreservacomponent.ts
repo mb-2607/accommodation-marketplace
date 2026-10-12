@@ -90,7 +90,6 @@ export class Confirmarreservacomponent implements OnInit {
         );
 
         if (confirmada) {
-            console.log("Funcionó crack " + this.form.controls.userName.value);
 
             const datos = this.form.getRawValue();
 

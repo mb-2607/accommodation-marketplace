@@ -1,4 +1,4 @@
-# Lralojamiento
+# Reservas LR
 ## Accommodation-Marketplace
 
 A frontend to browse, get quotes for, and simulate bookings of short-term
@@ -19,6 +19,8 @@ A frontend to browse, get quotes for, and simulate bookings of short-term
 - Leaflet
 - Node.js
 - npm
+- Firebase
+- Figma (prototypes)
 
 ## Requeriments
 
